@@ -1,5 +1,7 @@
 # NJC Travel Directive Flight Policy
 
+**Source of the handbook:** https://www.njc-cnm.gc.ca/directive/d10/v328/en?print=1 and https://www.njc-cnm.gc.ca/decision/1575/en. The agent reads it verbatim (bundled at `src/plugin/data/policy.txt`); flights, fares and trips are synthetic.
+
 **No affiliation with the National Joint Council.** The handbook is the NJC *Travel Directive*, version 328
 (effective December 1, 2026), with NJC Decision 1575 (December 18, 2013), both public Government of Canada web
 pages, bundled verbatim for research. Do not publish this plugin until it has passed validation (MASTER_PLAN
