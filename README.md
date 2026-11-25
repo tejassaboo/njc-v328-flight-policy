@@ -96,7 +96,8 @@ waits for a sign-off and never accepts `NONE`: it is the manager with delegated 
 employer, and on a hold over unclear words also `NOT_NAMED` (nobody is named to settle what the words mean).
 A booking that declines what the traveller asked for gives the reason the request is declined (the task says so), and accepts `LOWEST_FARE` only where the lowest-fare rule is that reason.
 The always-cheapest agent (approver `NONE`, reason `LOWEST_FARE`) passes 8 cases, the always-flag agent 3. The cabin is graded as
-the chosen offer's own cabin. Re-validation findings: `tests/REVALIDATION_NOTES.md`.
+the chosen offer's own cabin. Re-validation findings: `tests/REVALIDATION_NOTES.md`;
+paid validation of 2026-11-25: `tests/VALIDATION_NOTES.md`.
 
 Duration (`rules.over`): continuous air travel from the first scheduled departure, connections included, cut
 by an overnight stop (a ticketed stopover with a hotel night); strictly over 540 minutes ("exceeds nine
