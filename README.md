@@ -95,7 +95,7 @@ re-validation of 2026-11-24). A refusal relies on no sign-off, so `NONE` is acce
 waits for a sign-off and never accepts `NONE`: it is the manager with delegated authority (lines 145-153) or the
 employer, and on a hold over unclear words also `NOT_NAMED` (nobody is named to settle what the words mean).
 The always-cheapest agent (approver `NONE`) passes 15 cases, the always-flag agent 3. The cabin is graded as
-the chosen offer's own cabin. Re-validation findings: `REVALIDATION_NOTES.md`.
+the chosen offer's own cabin. Re-validation findings: `tests/REVALIDATION_NOTES.md`.
 
 Duration (`rules.over`): continuous air travel from the first scheduled departure, connections included, cut
 by an overnight stop (a ticketed stopover with a hotel night); strictly over 540 minutes ("exceeds nine

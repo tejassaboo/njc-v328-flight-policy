@@ -78,7 +78,7 @@ AUDIT_CLAUSES = {"arctic-lupine": ["EMPLOYER_AUTHORIZATION"]}
 # travel authorization, and the physician's opinion or the supervisor's confirmation where needed), so every BOOK
 # accept set holds NONE (as the design had it).
 
-# Paid re-validation of 2026-11-24 (REVALIDATION_NOTES.md): grader defects, each a code a careful reader could
+# Paid re-validation of 2026-11-24 (tests/REVALIDATION_NOTES.md): grader defects, each a code a careful reader could
 # defend. iron-plover's hold also waits for the director to choose the routing (line 119); maple-osprey declines
 # the changeable fare wanted for personal plans (line 1003); yew-coulee's visit is refused under the spouse
 # provision, and the shared list has no code for a visit refused on cost (line 1097).
