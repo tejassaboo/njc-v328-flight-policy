@@ -1,0 +1,168 @@
+{
+  "id": "kelp-lantern",
+  "category": "boundary_twin",
+  "overlays": [
+    "date_arithmetic",
+    "month_end",
+    "outside_air_section"
+  ],
+  "twin_of": "harbour-sumac",
+  "twin_fact": "travel status 2026-12-14 to 2027-02-03: 51 days (52 counting both ends)",
+  "flag_twins": [],
+  "ambiguity_note": "none",
+  "request": "I'm on assignment in London and would like to fly home to Ottawa for a weekend in mid-January. Can you set that up?",
+  "trip": {
+    "traveller_title": "policy analyst",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [],
+    "origin": "LHR",
+    "origin_state_or_province": "",
+    "destination": "YOW",
+    "destination_state_or_province": "Ontario",
+    "depart_date": "2027-01-15",
+    "return_date": "2027-01-17",
+    "booking_date": "2027-01-04",
+    "purpose": "weekend trip home during assignment",
+    "authority_kind": "WRITTEN_TRIP_AUTHORITY",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "the traveller's director",
+    "authority_covers": "",
+    "assignment_location": "London, United Kingdom",
+    "travel_status_start": "2026-12-14",
+    "travel_status_end": "2027-02-03",
+    "continuous_travel_status": true,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [],
+    "itinerary_note": "",
+    "other_notes": [
+      "Work schedule permits absence from Friday afternoon to Monday morning."
+    ]
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "employee_home",
+        "origin": "LHR",
+        "destination": "YOW",
+        "date": "2027-01-15",
+        "return_date": "2027-01-17",
+        "background": 0,
+        "flights": {
+          "ba-1": {
+            "carrier": "BA",
+            "depart": "15:00",
+            "minutes": [
+              470
+            ],
+            "return": {
+              "depart": "18:30",
+              "minutes": [
+                415
+              ]
+            }
+          },
+          "vs-1": {
+            "carrier": "VS",
+            "depart": "16:30",
+            "minutes": [
+              470
+            ],
+            "return": {
+              "depart": "19:45",
+              "minutes": [
+                415
+              ]
+            }
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "ba-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 106000
+          },
+          {
+            "slot": "O2",
+            "flight": "vs-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 113500
+          },
+          {
+            "slot": "O3",
+            "flight": "ba-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 129000,
+            "refundable": true
+          },
+          {
+            "slot": "O4",
+            "flight": "ba-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 498000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "BOOK",
+    "offer_slots": [
+      "O1"
+    ],
+    "cabins": [
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "LOWEST_FARE",
+      "WEEKEND_TRAVEL_HOME"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
+    ],
+    "clauses": [
+      "INTERNATIONAL_WEEKEND_HOME"
+    ],
+    "unclear_phrase": ""
+  },
+  "must_keep": [
+    {
+      "lines": [
+        849,
+        851
+      ],
+      "sha256": "2825858468b35c38e288da8de4bc65f4db15d99be09ec8088d74d619a40c45d7",
+      "quote": "The provisions outlined in this module apply when a traveller is away from the workplace on government travel overnight, outside Canada or the continental USA or when the point of departure is outside of Canada or the continental USA",
+      "why": "R15 3.4: scope: Module 4 (international)"
+    },
+    {
+      "lines": [
+        1057,
+        1079
+      ],
+      "sha256": "a41606974019264d531039cc3b5361227836a4a25fcdcaa71ed5d4b6d75f729e",
+      "quote": "Provided the employee is in continuous travel status, the employee is entitled to return trips home as per the table below:",
+      "why": "R20 3.4.12: weekend travel home (Module 4)"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design london-secondment-winter. Return direction 415 min, outbound 470 min: both under nine hours, so 3.4.11 never competes with 'most economical return airfare'. Port: reason accept set widened with ['LOWEST_FARE'] (shared reason list).",
+  "answer_key_inputs": {
+    "origin_region": "INTERNATIONAL",
+    "destination_region": "CANADA",
+    "intent": "NEUTRAL",
+    "kind": "WEEKEND_HOME"
+  }
+}

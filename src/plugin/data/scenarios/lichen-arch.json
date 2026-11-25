@@ -1,0 +1,176 @@
+{
+  "id": "lichen-arch",
+  "category": "flag",
+  "overlays": [
+    "multi_leg"
+  ],
+  "twin_of": "quarry-tern",
+  "twin_fact": "overnight terminal wait, no hotel (twins: hotel night -> economy; 95-min connection -> business)",
+  "flag_twins": [
+    "quarry-tern",
+    "violet-muskeg"
+  ],
+  "ambiguity_note": {
+    "phrase": "layover equivalent to an overnight stop",
+    "readings": [
+      "The 390-minute wait in the Frankfurt terminal across local midnight is a 'layover equivalent to an overnight stop' (line 1019): blocks of 460 and 505 minutes, neither over nine hours: economy.",
+      "No overnight stop is made (no hotel night), so continuous air travel runs 1,355 minutes from the first departure to Nairobi: business. Decision 1575 (line 3236) asks for a review of each case."
+    ]
+  },
+  "request": "Please book me to Nairobi for the refugee consultations on the routing my director signed off on, with the best seat I'm allowed.",
+  "trip": {
+    "traveller_title": "analyst",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [],
+    "origin": "YOW",
+    "origin_state_or_province": "Ontario",
+    "destination": "NBO",
+    "destination_state_or_province": "",
+    "depart_date": "2027-01-18",
+    "return_date": "2027-01-26",
+    "booking_date": "2026-12-15",
+    "purpose": "refugee resettlement consultations",
+    "authority_kind": "WRITTEN_TRIP_AUTHORITY",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "the traveller's director",
+    "authority_covers": "",
+    "assignment_location": "",
+    "travel_status_start": "",
+    "travel_status_end": "",
+    "continuous_travel_status": false,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [],
+    "itinerary_note": "The approved routing connects in Frankfurt overnight; no hotel is booked and the traveller waits in the terminal.",
+    "other_notes": []
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "outbound",
+        "origin": "YOW",
+        "destination": "NBO",
+        "date": "2027-01-18",
+        "return_date": "",
+        "background": 0,
+        "flights": {
+          "lh-1": {
+            "carrier": "LH",
+            "depart": "09:30",
+            "minutes": [
+              460,
+              505
+            ],
+            "via": [
+              "FRA"
+            ],
+            "layovers": [
+              390
+            ]
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "lh-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 149000
+          },
+          {
+            "slot": "O2",
+            "flight": "lh-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 624000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "FLAG_FOR_APPROVAL",
+    "offer_slots": [
+      "O1",
+      "O2"
+    ],
+    "cabins": [
+      "BUSINESS",
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "UNCLEAR_POLICY_TEXT"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY"
+    ],
+    "clauses": [
+      "INTERNATIONAL_TRANSPORTATION",
+      "NJC_DECISION"
+    ],
+    "unclear_phrase": "layover equivalent to an overnight stop"
+  },
+  "must_keep": [
+    {
+      "lines": [
+        145,
+        153
+      ],
+      "sha256": "045585c5fb463d91514c995dcf855ecfc3840ee4fd9701a859a2f64b6291c01a",
+      "quote": "ensure that the manager with delegated authority, in consultation with the employee and the employee's immediate supervisor:",
+      "why": "R09 1.5.1: approver: who authorizes"
+    },
+    {
+      "lines": [
+        849,
+        851
+      ],
+      "sha256": "2825858468b35c38e288da8de4bc65f4db15d99be09ec8088d74d619a40c45d7",
+      "quote": "The provisions outlined in this module apply when a traveller is away from the workplace on government travel overnight, outside Canada or the continental USA or when the point of departure is outside of Canada or the continental USA",
+      "why": "R15 3.4: scope: Module 4 (international)"
+    },
+    {
+      "lines": [
+        1019,
+        1019
+      ],
+      "sha256": "ba236b7b30f2d8e61755954628ddd4bfe529ec2616b1bcd28e0eab8f7715d2c2",
+      "quote": "Where available, business/executive class air travel shall be authorized where continuous air travel exceeds nine hours. Continuous air travel starts at the scheduled flight departure time and ends with the arrival at destination terminal or with an overnight stop or layover equivalent to an overnight stop. In the event that business/executive class air travel is not available, any lower fare class shall be authorized, where available.",
+      "why": "R18 3.4.11: cabin: business when continuous air travel exceeds nine hours; duration definition; lower class"
+    },
+    {
+      "lines": [
+        3214,
+        3214
+      ],
+      "sha256": "cf5b5ef7cd903b22129c1ec25589995d9a44a94776afc0452abb3c24b4e79995",
+      "quote": "As air travel time in the second itinerary was divided and therefore less than nine continuous hours the employee would travel in economy class.",
+      "why": "Decision 1575 background: an overnight stop divides continuous air travel"
+    },
+    {
+      "lines": [
+        3236,
+        3236
+      ],
+      "sha256": "2236ad658c3c02485936eaa9c31dd0a92070451ff0ee64845ea6819470daa496",
+      "quote": "The Committee noted that the application of section 3.4.11 of the Directive should be based on a comprehensive review of the circumstances of each case. Likewise, the total cost should not be the only consideration when making arrangements.",
+      "why": "Decision 1575: the Committee's decision"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design ottawa-nairobi-refugee-consultations. Port: must_keep Decision 1575 narrowed from lines 3214-3236 to 3214 and 3236.",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "INTERNATIONAL",
+    "intent": "BEST_ALLOWED",
+    "kind": "FLIGHT"
+  }
+}

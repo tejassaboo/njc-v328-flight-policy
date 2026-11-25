@@ -1,0 +1,16 @@
+{
+  "id": "njc-v328-flight-policy",
+  "name": "NJC Travel Directive Flight Policy",
+  "slug": "njc-v328",
+  "title": "National Joint Council Travel Directive, version 328, with NJC Decision 1575",
+  "frozen_file": "njc_v328_policy.txt",
+  "sha256": "3859c4c8bd689676368b3fd25777e768b02df24c8ba23f597108789b52b3da65",
+  "raw_pdf_sha256": "a86bcb1749cffc3a2d1b140d1de38833811e8c1df400176065d840e9c594a0fe",
+  "words": 18988,
+  "lines": 3236,
+  "source": "https://www.njc-cnm.gc.ca/directive/d10/v328/en?print=1 and https://www.njc-cnm.gc.ca/decision/1575/en",
+  "frozen_on": "2026-11-24",
+  "scenario_count": 32,
+  "currency": "CAD",
+  "background_offers": 0
+}

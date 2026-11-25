@@ -1,0 +1,178 @@
+{
+  "id": "boreal-quill",
+  "category": "flag",
+  "overlays": [
+    "multi_leg"
+  ],
+  "twin_of": "wheat-bittern",
+  "twin_fact": "Alaska destination, 585 min (twins: Orlando -> economy; Honolulu -> business)",
+  "flag_twins": [
+    "wheat-bittern",
+    "rapids-aster"
+  ],
+  "ambiguity_note": {
+    "phrase": "continental USA",
+    "readings": [
+      "Alaska is not contiguous with the other states, so a trip there is outside 'the continental USA' (lines 609, 851): Module 4, and the 585-minute journey exceeds nine hours (line 1019): business.",
+      "Appendix C, titled 'Modules 1, 2 and 3', says 'Alaska follows the Yukon rates' (line 1689) and leaves Alaska off the 'Outside the Continental USA ONLY' list (line 1691): Module 3, which has no business sentence (line 769): economy."
+    ]
+  },
+  "request": "Please book me to Anchorage for the Arctic shipping meeting, best seat I'm allowed.",
+  "trip": {
+    "traveller_title": "analyst",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [],
+    "origin": "YOW",
+    "origin_state_or_province": "Ontario",
+    "destination": "ANC",
+    "destination_state_or_province": "Alaska",
+    "depart_date": "2026-12-14",
+    "return_date": "2026-12-18",
+    "booking_date": "2026-12-02",
+    "purpose": "Arctic shipping safety meeting",
+    "authority_kind": "WRITTEN_TRIP_AUTHORITY",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "the traveller's director",
+    "authority_covers": "",
+    "assignment_location": "",
+    "travel_status_start": "",
+    "travel_status_end": "",
+    "continuous_travel_status": false,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [],
+    "itinerary_note": "",
+    "other_notes": []
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "outbound",
+        "origin": "YOW",
+        "destination": "ANC",
+        "date": "2026-12-14",
+        "return_date": "",
+        "background": 0,
+        "flights": {
+          "ac-1": {
+            "carrier": "AC",
+            "depart": "08:00",
+            "minutes": [
+              300,
+              205
+            ],
+            "via": [
+              "YVR"
+            ],
+            "layovers": [
+              80
+            ]
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "ac-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 118000
+          },
+          {
+            "slot": "O2",
+            "flight": "ac-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 399000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "FLAG_FOR_APPROVAL",
+    "offer_slots": [
+      "O1",
+      "O2"
+    ],
+    "cabins": [
+      "BUSINESS",
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "UNCLEAR_POLICY_TEXT"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY"
+    ],
+    "clauses": [
+      "APPENDIX_C",
+      "CANADA_USA_MODULE",
+      "INTERNATIONAL_MODULE",
+      "INTERNATIONAL_TRANSPORTATION"
+    ],
+    "unclear_phrase": "continental USA"
+  },
+  "must_keep": [
+    {
+      "lines": [
+        145,
+        153
+      ],
+      "sha256": "045585c5fb463d91514c995dcf855ecfc3840ee4fd9701a859a2f64b6291c01a",
+      "quote": "ensure that the manager with delegated authority, in consultation with the employee and the employee's immediate supervisor:",
+      "why": "R09 1.5.1: approver: who authorizes"
+    },
+    {
+      "lines": [
+        607,
+        609
+      ],
+      "sha256": "60dd01cee87deb62ce557930c584438db6cb2a04c349ff3c4e99c8093d73d739",
+      "quote": "The provisions outlined in this travel module apply when a traveller is away from the workplace on government travel overnight, in Canada or in the continental USA",
+      "why": "R12 3.3: scope: Module 3 (domestic)"
+    },
+    {
+      "lines": [
+        849,
+        851
+      ],
+      "sha256": "2825858468b35c38e288da8de4bc65f4db15d99be09ec8088d74d619a40c45d7",
+      "quote": "The provisions outlined in this module apply when a traveller is away from the workplace on government travel overnight, outside Canada or the continental USA or when the point of departure is outside of Canada or the continental USA",
+      "why": "R15 3.4: scope: Module 4 (international)"
+    },
+    {
+      "lines": [
+        1019,
+        1019
+      ],
+      "sha256": "ba236b7b30f2d8e61755954628ddd4bfe529ec2616b1bcd28e0eab8f7715d2c2",
+      "quote": "Where available, business/executive class air travel shall be authorized where continuous air travel exceeds nine hours. Continuous air travel starts at the scheduled flight departure time and ends with the arrival at destination terminal or with an overnight stop or layover equivalent to an overnight stop. In the event that business/executive class air travel is not available, any lower fare class shall be authorized, where available.",
+      "why": "R18 3.4.11: cabin: business when continuous air travel exceeds nine hours; duration definition; lower class"
+    },
+    {
+      "lines": [
+        1687,
+        1691
+      ],
+      "sha256": "35f558cce374663ebec07239ec101c8c143a17a0726836f12327061f96b85c18",
+      "quote": "Refer to Appendix D for United States of America (Outside the Continental USA ONLY: Guam, Hawaii, Northern Marianas, Puerto Rico and Virgin Islands) for meal and incidental allowances, paid in US funds.",
+      "why": "R26 Appendix C, 2: USA / Alaska / outside continental USA"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design ottawa-anchorage-arctic-shipping.",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "US_ALASKA",
+    "intent": "BEST_ALLOWED",
+    "kind": "FLIGHT"
+  }
+}

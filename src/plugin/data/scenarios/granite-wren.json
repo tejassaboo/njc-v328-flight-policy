@@ -1,0 +1,170 @@
+{
+  "id": "granite-wren",
+  "category": "hidden_clause",
+  "overlays": [
+    "multi_leg",
+    "upgrade_not_taken",
+    "outside_air_section"
+  ],
+  "twin_of": "",
+  "twin_fact": "",
+  "flag_twins": [],
+  "ambiguity_note": "none",
+  "request": "My colleague fell seriously ill on mission in Nairobi and his wife needs to get there from Ottawa. Please book her the cheapest ticket on the earliest routing.",
+  "trip": {
+    "traveller_title": "spouse of the hospitalized employee",
+    "traveller_kind": "FAMILY_MEMBER",
+    "workplace": "",
+    "companions": [],
+    "origin": "YOW",
+    "origin_state_or_province": "Ontario",
+    "destination": "NBO",
+    "destination_state_or_province": "",
+    "depart_date": "2026-12-16",
+    "return_date": "2026-12-30",
+    "booking_date": "2026-12-15",
+    "purpose": "next-of-kin travel to a hospitalized employee",
+    "authority_kind": "WRITTEN_TRIP_AUTHORITY",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "the hospitalized employee's director",
+    "authority_covers": "next-of-kin travel to Nairobi",
+    "assignment_location": "",
+    "travel_status_start": "",
+    "travel_status_end": "",
+    "continuous_travel_status": false,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "The attending physician has stated in writing that the presence of next-of-kin is warranted.",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [],
+    "itinerary_note": "",
+    "other_notes": []
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "outbound",
+        "origin": "YOW",
+        "destination": "NBO",
+        "date": "2026-12-16",
+        "return_date": "",
+        "background": 0,
+        "flights": {
+          "ba-1": {
+            "carrier": "BA",
+            "depart": "20:00",
+            "minutes": [
+              420,
+              510
+            ],
+            "via": [
+              "LHR"
+            ],
+            "layovers": [
+              90
+            ]
+          },
+          "vs-1": {
+            "carrier": "VS",
+            "depart": "21:00",
+            "minutes": [
+              420,
+              510
+            ],
+            "via": [
+              "LHR"
+            ],
+            "layovers": [
+              90
+            ]
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "ba-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 172000
+          },
+          {
+            "slot": "O2",
+            "flight": "vs-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 184500
+          },
+          {
+            "slot": "O3",
+            "flight": "ba-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 735000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "BOOK",
+    "offer_slots": [
+      "O1"
+    ],
+    "cabins": [
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "LOWEST_FARE",
+      "NEXT_OF_KIN_TRAVEL"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
+    ],
+    "clauses": [
+      "NEXT_OF_KIN"
+    ],
+    "unclear_phrase": ""
+  },
+  "must_keep": [
+    {
+      "lines": [
+        45,
+        45
+      ],
+      "sha256": "cace02a67ad1cdba579422c8e52f5fddd7d5fd74454f5babdb4572fbf0a7cf5d",
+      "quote": "This directive applies to public service employees and other persons travelling on government business, including training.",
+      "why": "R02 Application: scope: who"
+    },
+    {
+      "lines": [
+        849,
+        851
+      ],
+      "sha256": "2825858468b35c38e288da8de4bc65f4db15d99be09ec8088d74d619a40c45d7",
+      "quote": "The provisions outlined in this module apply when a traveller is away from the workplace on government travel overnight, outside Canada or the continental USA or when the point of departure is outside of Canada or the continental USA",
+      "why": "R15 3.4: scope: Module 4 (international)"
+    },
+    {
+      "lines": [
+        1149,
+        1149
+      ],
+      "sha256": "a104a974343ab81d934eb1da7152f9fe989ce668a376475ed26d9f65a9d8f7b3",
+      "quote": "When, in the opinion of the attending physician, an employee's condition resulting from illness or injury warrants the presence of the next-of-kin or a representative of the family, actual and reasonable travel expenses may be reimbursed, as if that person were an employee.",
+      "why": "R24 5.2.4: next-of-kin travel"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design nairobi-hospital-family-visit. Not an employee, but 5.2.4 reimburses next-of-kin travel as if an employee. The request asks for the cheapest seat, so the cabin does not depend on whether 'as if an employee' carries the business entitlement. Port: the design's KQ economy via London is not plausible in the template world (KQ's only hub is NBO, so YOW-LHR touches no KQ hub); that offer is flown by VS (hub LHR) at the same fare. BA stays cheapest; no Canadian carrier sells the route (W3 holds).",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "INTERNATIONAL",
+    "intent": "CHEAPEST",
+    "kind": "NEXT_OF_KIN"
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "id": "dawn-trillium",
+  "category": "multi_rule",
+  "overlays": [
+    "multi_traveller",
+    "personal_travel",
+    "outside_air_section",
+    "date_arithmetic"
+  ],
+  "twin_of": "yew-coulee",
+  "twin_fact": "spouse's cheapest return economy 1080 vs employee's 1240",
+  "flag_twins": [],
+  "ambiguity_note": "none",
+  "request": "Instead of flying home myself this time, I'd like my husband to come out and see me in Paris for a weekend in February. Can you book his ticket from Ottawa?",
+  "trip": {
+    "traveller_title": "statistician",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [],
+    "origin": "YOW",
+    "origin_state_or_province": "Ontario",
+    "destination": "CDG",
+    "destination_state_or_province": "",
+    "depart_date": "2027-02-12",
+    "return_date": "2027-02-14",
+    "booking_date": "2027-01-20",
+    "purpose": "spouse visit in place of the employee's weekend trip home",
+    "authority_kind": "WRITTEN_TRIP_AUTHORITY",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "the traveller's director",
+    "authority_covers": "the employee's assignment; the director agrees to a spouse visit in place of a trip home if the rules allow it",
+    "assignment_location": "Paris, France",
+    "travel_status_start": "2027-01-04",
+    "travel_status_end": "2027-03-15",
+    "continuous_travel_status": true,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "spouse",
+    "visitor_home": "Ottawa",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [],
+    "itinerary_note": "",
+    "other_notes": [
+      "The supervisor confirms the employee can be away from work that weekend."
+    ]
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "employee_home",
+        "origin": "CDG",
+        "destination": "YOW",
+        "date": "2027-02-12",
+        "return_date": "2027-02-14",
+        "background": 0,
+        "flights": {
+          "af-1": {
+            "carrier": "AF",
+            "depart": "08:15",
+            "minutes": [
+              465
+            ],
+            "return": {
+              "depart": "18:00",
+              "minutes": [
+                415
+              ]
+            }
+          },
+          "af-2": {
+            "carrier": "AF",
+            "depart": "11:05",
+            "minutes": [
+              465
+            ],
+            "return": {
+              "depart": "20:30",
+              "minutes": [
+                415
+              ]
+            }
+          }
+        },
+        "offers": [
+          {
+            "slot": "E1",
+            "flight": "af-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 124000
+          },
+          {
+            "slot": "E2",
+            "flight": "af-2",
+            "cabin": "ECONOMY",
+            "fare_cents": 131500
+          },
+          {
+            "slot": "E3",
+            "flight": "af-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 520000
+          }
+        ]
+      },
+      {
+        "name": "spouse_visit",
+        "origin": "YOW",
+        "destination": "CDG",
+        "date": "2027-02-12",
+        "return_date": "2027-02-14",
+        "background": 0,
+        "flights": {
+          "af-1": {
+            "carrier": "AF",
+            "depart": "08:15",
+            "minutes": [
+              415
+            ],
+            "return": {
+              "depart": "18:00",
+              "minutes": [
+                465
+              ]
+            }
+          },
+          "af-2": {
+            "carrier": "AF",
+            "depart": "11:05",
+            "minutes": [
+              415
+            ],
+            "return": {
+              "depart": "20:30",
+              "minutes": [
+                465
+              ]
+            }
+          }
+        },
+        "offers": [
+          {
+            "slot": "S1",
+            "flight": "af-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 108000
+          },
+          {
+            "slot": "S2",
+            "flight": "af-2",
+            "cabin": "ECONOMY",
+            "fare_cents": 115000
+          },
+          {
+            "slot": "S3",
+            "flight": "af-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 515000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "BOOK",
+    "offer_slots": [
+      "S1"
+    ],
+    "cabins": [
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "LOWEST_FARE",
+      "SPOUSE_ALTERNATIVE"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
+    ],
+    "clauses": [
+      "INTERNATIONAL_WEEKEND_ALTERNATIVES"
+    ],
+    "unclear_phrase": ""
+  },
+  "must_keep": [
+    {
+      "lines": [
+        849,
+        851
+      ],
+      "sha256": "2825858468b35c38e288da8de4bc65f4db15d99be09ec8088d74d619a40c45d7",
+      "quote": "The provisions outlined in this module apply when a traveller is away from the workplace on government travel overnight, outside Canada or the continental USA or when the point of departure is outside of Canada or the continental USA",
+      "why": "R15 3.4: scope: Module 4 (international)"
+    },
+    {
+      "lines": [
+        1057,
+        1079
+      ],
+      "sha256": "a41606974019264d531039cc3b5361227836a4a25fcdcaa71ed5d4b6d75f729e",
+      "quote": "Provided the employee is in continuous travel status, the employee is entitled to return trips home as per the table below:",
+      "why": "R20 3.4.12: weekend travel home (Module 4)"
+    },
+    {
+      "lines": [
+        1095,
+        1097
+      ],
+      "sha256": "6c58a3333e449c4db41bd8e1551ccd309126c7ab53ccda06eb53daf8c26fb47c",
+      "quote": "As an alternative to weekend travel home by the employee, a spouse, a common-law partner or a dependant may be authorized to travel to the employee's assigned work location when there is no additional cost to the employer. The airfare and pertinent travel arrangements shall be processed through government suppliers.",
+      "why": "R22 3.4.13: spouse / dependant visit instead of trip home (Module 4)"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design paris-assignment-family-visit. 70 days of travel status earns one trip home (3.4.12); the spouse visit replaces it only at no additional cost. Port: reason accept set widened with ['LOWEST_FARE'] (shared reason list).",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "INTERNATIONAL",
+    "intent": "NEUTRAL",
+    "kind": "SPOUSE_VISIT"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "id": "alder-fiddle",
+  "category": "flag",
+  "overlays": [
+    "multi_traveller",
+    "approval_required",
+    "outside_air_section"
+  ],
+  "twin_of": "eastern-larch",
+  "twin_fact": "blanket authority issued to a group (twin: to the individual)",
+  "flag_twins": [
+    "eastern-larch",
+    "arctic-lupine"
+  ],
+  "ambiguity_note": "none: the words are clear; the trip lacks an approval (a group cannot rely on a blanket authority)",
+  "request": "Please book the three of us on the Monday morning flight to Calgary for the field audit; we're all covered by the team's standing authority.",
+  "trip": {
+    "traveller_title": "audit team lead",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [
+      "auditor (Ottawa, Ontario, Canada)",
+      "auditor (Ottawa, Ontario, Canada)"
+    ],
+    "origin": "YOW",
+    "origin_state_or_province": "Ontario",
+    "destination": "YYC",
+    "destination_state_or_province": "Alberta",
+    "depart_date": "2026-12-14",
+    "return_date": "2026-12-17",
+    "booking_date": "2026-12-07",
+    "purpose": "field audit",
+    "authority_kind": "BLANKET_TRAVEL_AUTHORITY",
+    "authority_issued_to": "GROUP",
+    "authority_given_by": "the traveller's director",
+    "authority_covers": "the three-person audit team, for audit trips in Canada, fiscal year 2026-27",
+    "assignment_location": "",
+    "travel_status_start": "",
+    "travel_status_end": "",
+    "continuous_travel_status": false,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [],
+    "itinerary_note": "",
+    "other_notes": []
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "outbound",
+        "origin": "YOW",
+        "destination": "YYC",
+        "date": "2026-12-14",
+        "return_date": "",
+        "background": 0,
+        "flights": {
+          "ac-1": {
+            "carrier": "AC",
+            "depart": "08:15",
+            "minutes": [
+              255
+            ]
+          },
+          "ws-1": {
+            "carrier": "WS",
+            "depart": "11:05",
+            "minutes": [
+              255
+            ]
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "ac-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 45500
+          },
+          {
+            "slot": "O2",
+            "flight": "ws-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 49800
+          },
+          {
+            "slot": "O3",
+            "flight": "ac-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 164000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "FLAG_FOR_APPROVAL",
+    "offer_slots": [
+      "O1"
+    ],
+    "cabins": [
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "APPROVAL_REQUIRED"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY"
+    ],
+    "clauses": [
+      "DEFINITIONS",
+      "WRITTEN_AUTHORIZATION"
+    ],
+    "unclear_phrase": ""
+  },
+  "must_keep": [
+    {
+      "lines": [
+        57,
+        57
+      ],
+      "sha256": "1459acb42cbac1b48723d0f222336108e3973f4b0a6174df3a2726901e98456f",
+      "quote": "Any exceptions to the blanket travel authority (BTA) parameters shall require that the individual trip be specifically approved, prior to travel status, where possible. BTA does not apply to groups of employees.",
+      "why": "R05 Definitions: approval: blanket travel authority"
+    },
+    {
+      "lines": [
+        121,
+        121
+      ],
+      "sha256": "75b359133e6a6681c2d7d5c522fe60510ae3227e67a698d9b4ba56c1bd21b99a",
+      "quote": "Government travel shall be authorized in advance in writing to ensure that all travel arrangements are in compliance with the provisions of this directive. In special circumstances, travel shall be post-authorized by the employer.",
+      "why": "R07 1.1.2: approval: in advance, in writing"
+    },
+    {
+      "lines": [
+        145,
+        153
+      ],
+      "sha256": "045585c5fb463d91514c995dcf855ecfc3840ee4fd9701a859a2f64b6291c01a",
+      "quote": "ensure that the manager with delegated authority, in consultation with the employee and the employee's immediate supervisor:",
+      "why": "R09 1.5.1: approver: who authorizes"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design audit-team-calgary. Approval required, not 'no compliant offer': compliant economy offers exist once the trip is specifically approved. Port: category hidden_or_synonym -> flag (the template files every FLAG decision under flag; the 32-mix is then 3 hidden and 4 flags, as EDGE_CASES 5.2 gives).",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "CANADA",
+    "intent": "NEUTRAL",
+    "kind": "FLIGHT"
+  }
+}

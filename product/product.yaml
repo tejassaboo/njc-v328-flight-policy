@@ -1,0 +1,13 @@
+_ > nanoagent.plugin.v0001.ProductConfig:
+tagline: "One flight request, the real public-service travel directive: book it, refuse it, or hold it for approval"
+summary: "An agent handles one flight request under the National Joint Council Travel Directive (version 328, effective December 1, 2026) with NJC Decision 1575, read verbatim (about 19,000 words). It reads the trip record, searches a simulated flight world (real airports and airlines, synthetic schedules and fares in Canadian dollars) and submits a decision with the offer, cabin, reason, approver and directive section. A deterministic verifier rebuilds the offers and the directive's answer itself and checks every field. Thirty-two cases cover continuous air travel on both sides of nine hours, connections and overnight stops, the Canada and continental USA boundary, weekend travel home and spouse visits, next-of-kin travel, blanket authorities, and the directive's own unclear words."
+highlights:
+  - "The verbatim directive: no paraphrase, no rules restated in the task"
+  - "Exact boundaries: 540 against 541 minutes of continuous air travel, nonstop and through a connection"
+  - "Several searches and round trips: a spouse's visit is priced against the employee's own trip home"
+  - "Unclear words become holds for approval, each once, with clear twins on both sides"
+steps:
+  - "Name a case, for example glacier-vetch, with the traveller's request"
+  - "The agent reads the trip record and searches the routes and dates the decision needs"
+  - "It submits BOOK, REFUSE or FLAG_FOR_APPROVAL with the offer, cabin, reason, approver and section"
+  - "The verifier recomputes the directive's answer and checks every field"

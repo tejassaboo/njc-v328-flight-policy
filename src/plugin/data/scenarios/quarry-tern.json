@@ -1,0 +1,172 @@
+{
+  "id": "quarry-tern",
+  "category": "boundary_twin",
+  "overlays": [
+    "multi_leg",
+    "overnight_stop"
+  ],
+  "twin_of": "violet-muskeg",
+  "twin_fact": "Frankfurt stop is a hotel night (twin: 95-min connection)",
+  "flag_twins": [],
+  "ambiguity_note": "none",
+  "request": "Please book me to Nairobi for the health summit on the routing my director signed off on, with the best seat I'm allowed.",
+  "trip": {
+    "traveller_title": "analyst",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [],
+    "origin": "YOW",
+    "origin_state_or_province": "Ontario",
+    "destination": "NBO",
+    "destination_state_or_province": "",
+    "depart_date": "2027-01-18",
+    "return_date": "2027-01-26",
+    "booking_date": "2026-12-15",
+    "purpose": "global health summit",
+    "authority_kind": "WRITTEN_TRIP_AUTHORITY",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "the traveller's director",
+    "authority_covers": "",
+    "assignment_location": "",
+    "travel_status_start": "",
+    "travel_status_end": "",
+    "continuous_travel_status": false,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [],
+    "itinerary_note": "The approved routing stops in Frankfurt with a booked hotel night before the onward flight next morning.",
+    "other_notes": []
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "outbound",
+        "origin": "YOW",
+        "destination": "NBO",
+        "date": "2027-01-18",
+        "return_date": "",
+        "background": 0,
+        "flights": {
+          "lh-1": {
+            "carrier": "LH",
+            "depart": "09:30",
+            "minutes": [
+              460,
+              505
+            ],
+            "via": [
+              "FRA"
+            ],
+            "layovers": [
+              680
+            ],
+            "stopovers": [
+              true
+            ]
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "lh-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 149000
+          },
+          {
+            "slot": "O2",
+            "flight": "lh-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 624000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "BOOK",
+    "offer_slots": [
+      "O1"
+    ],
+    "cabins": [
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "LONG_FLIGHT_CONDITION_NOT_MET",
+      "LOWEST_FARE",
+      "UPGRADE_NOT_ELIGIBLE"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
+    ],
+    "clauses": [
+      "INTERNATIONAL_TRANSPORTATION",
+      "NJC_DECISION"
+    ],
+    "unclear_phrase": ""
+  },
+  "must_keep": [
+    {
+      "lines": [
+        849,
+        851
+      ],
+      "sha256": "2825858468b35c38e288da8de4bc65f4db15d99be09ec8088d74d619a40c45d7",
+      "quote": "The provisions outlined in this module apply when a traveller is away from the workplace on government travel overnight, outside Canada or the continental USA or when the point of departure is outside of Canada or the continental USA",
+      "why": "R15 3.4: scope: Module 4 (international)"
+    },
+    {
+      "lines": [
+        1017,
+        1017
+      ],
+      "sha256": "2f377fd215151e3c4d5a7b798c40650cfb726c6add6e1906d09ab6fd0b8baf4d",
+      "quote": "The standard for air travel is economy class. The lowest available airfares appropriate to particular itineraries shall be sought and bookings shall be made as far in advance as possible.",
+      "why": "R17 3.4.11: cabin + lowest fare + advance booking (Module 4)"
+    },
+    {
+      "lines": [
+        1019,
+        1019
+      ],
+      "sha256": "ba236b7b30f2d8e61755954628ddd4bfe529ec2616b1bcd28e0eab8f7715d2c2",
+      "quote": "Where available, business/executive class air travel shall be authorized where continuous air travel exceeds nine hours. Continuous air travel starts at the scheduled flight departure time and ends with the arrival at destination terminal or with an overnight stop or layover equivalent to an overnight stop. In the event that business/executive class air travel is not available, any lower fare class shall be authorized, where available.",
+      "why": "R18 3.4.11: cabin: business when continuous air travel exceeds nine hours; duration definition; lower class"
+    },
+    {
+      "lines": [
+        3214,
+        3214
+      ],
+      "sha256": "cf5b5ef7cd903b22129c1ec25589995d9a44a94776afc0452abb3c24b4e79995",
+      "quote": "As air travel time in the second itinerary was divided and therefore less than nine continuous hours the employee would travel in economy class.",
+      "why": "Decision 1575 background: an overnight stop divides continuous air travel"
+    },
+    {
+      "lines": [
+        3236,
+        3236
+      ],
+      "sha256": "2236ad658c3c02485936eaa9c31dd0a92070451ff0ee64845ea6819470daa496",
+      "quote": "The Committee noted that the application of section 3.4.11 of the Directive should be based on a comprehensive review of the circumstances of each case. Likewise, the total cost should not be the only consideration when making arrangements.",
+      "why": "Decision 1575: the Committee's decision"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design ottawa-nairobi-health-summit. Port: must_keep Decision 1575 narrowed from lines 3214-3236 to 3214 and 3236. Port: reason accept set widened with ['UPGRADE_NOT_ELIGIBLE', 'LONG_FLIGHT_CONDITION_NOT_MET'] (shared reason list).",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "INTERNATIONAL",
+    "intent": "BEST_ALLOWED",
+    "kind": "FLIGHT"
+  }
+}

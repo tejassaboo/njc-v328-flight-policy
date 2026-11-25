@@ -1,0 +1,148 @@
+{
+  "id": "arctic-lupine",
+  "category": "refusal",
+  "overlays": [
+    "personal_travel",
+    "outside_air_section"
+  ],
+  "twin_of": "",
+  "twin_fact": "",
+  "flag_twins": [],
+  "ambiguity_note": "none",
+  "request": "Can you book flights for my family's holiday in Mexico City over the break and put them on the usual travel account?",
+  "trip": {
+    "traveller_title": "analyst",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [],
+    "origin": "YYZ",
+    "origin_state_or_province": "Ontario",
+    "destination": "MEX",
+    "destination_state_or_province": "",
+    "depart_date": "2026-12-26",
+    "return_date": "2027-01-02",
+    "booking_date": "2026-12-01",
+    "purpose": "family vacation",
+    "authority_kind": "NONE",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "",
+    "authority_covers": "",
+    "assignment_location": "",
+    "travel_status_start": "",
+    "travel_status_end": "",
+    "continuous_travel_status": false,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [],
+    "itinerary_note": "",
+    "other_notes": []
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "outbound",
+        "origin": "YYZ",
+        "destination": "MEX",
+        "date": "2026-12-26",
+        "return_date": "",
+        "background": 0,
+        "flights": {
+          "ac-1": {
+            "carrier": "AC",
+            "depart": "08:15",
+            "minutes": [
+              285
+            ]
+          },
+          "am-1": {
+            "carrier": "AM",
+            "depart": "11:05",
+            "minutes": [
+              285
+            ]
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "ac-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 59000
+          },
+          {
+            "slot": "O2",
+            "flight": "am-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 64500
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "REFUSE",
+    "offer_slots": [],
+    "cabins": [
+      "NONE"
+    ],
+    "reason_codes": [
+      "PERSONAL_TRAVEL_NOT_COVERED"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
+    ],
+    "clauses": [
+      "APPLICATION",
+      "DEFINITIONS",
+      "WRITTEN_AUTHORIZATION"
+    ],
+    "unclear_phrase": ""
+  },
+  "must_keep": [
+    {
+      "lines": [
+        45,
+        45
+      ],
+      "sha256": "cace02a67ad1cdba579422c8e52f5fddd7d5fd74454f5babdb4572fbf0a7cf5d",
+      "quote": "This directive applies to public service employees and other persons travelling on government business, including training.",
+      "why": "R02 Application: scope: who"
+    },
+    {
+      "lines": [
+        89,
+        89
+      ],
+      "sha256": "3f5f314be49c0cceb3374b2171017df232e3a469fe5c108a0e4cb799f849041c",
+      "quote": "Government travel (voyage en service commandé) - all travel authorized by the employer",
+      "why": "R04 Definitions: government travel defined"
+    },
+    {
+      "lines": [
+        121,
+        121
+      ],
+      "sha256": "75b359133e6a6681c2d7d5c522fe60510ae3227e67a698d9b4ba56c1bd21b99a",
+      "quote": "Government travel shall be authorized in advance in writing to ensure that all travel arrangements are in compliance with the provisions of this directive. In special circumstances, travel shall be post-authorized by the employer.",
+      "why": "R07 1.1.2: approval: in advance, in writing"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design family-holiday-mexico-city.",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "INTERNATIONAL",
+    "intent": "NEUTRAL",
+    "kind": "PERSONAL"
+  }
+}

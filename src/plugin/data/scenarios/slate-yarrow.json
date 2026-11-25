@@ -1,0 +1,167 @@
+{
+  "id": "slate-yarrow",
+  "category": "multi_rule",
+  "overlays": [
+    "dearer_option"
+  ],
+  "twin_of": "",
+  "twin_fact": "",
+  "flag_twins": [],
+  "ambiguity_note": "none",
+  "request": "I have to be at the treaty session in Winnipeg when it opens on Tuesday morning. Please book my flight out that morning.",
+  "trip": {
+    "traveller_title": "analyst",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [],
+    "origin": "YYZ",
+    "origin_state_or_province": "Ontario",
+    "destination": "YWG",
+    "destination_state_or_province": "Manitoba",
+    "depart_date": "2026-12-08",
+    "return_date": "2026-12-09",
+    "booking_date": "2026-12-01",
+    "purpose": "treaty negotiation session",
+    "authority_kind": "WRITTEN_TRIP_AUTHORITY",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "the traveller's director",
+    "authority_covers": "",
+    "assignment_location": "",
+    "travel_status_start": "",
+    "travel_status_end": "",
+    "continuous_travel_status": false,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "2026-12-08 09:30",
+    "airport_to_venue_minutes": 25,
+    "loyalty_programs": [],
+    "itinerary_note": "",
+    "other_notes": []
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "outbound",
+        "origin": "YYZ",
+        "destination": "YWG",
+        "date": "2026-12-08",
+        "return_date": "",
+        "background": 0,
+        "flights": {
+          "ac-1": {
+            "carrier": "AC",
+            "depart": "08:10",
+            "minutes": [
+              150
+            ]
+          },
+          "ac-2": {
+            "carrier": "AC",
+            "depart": "06:00",
+            "minutes": [
+              150
+            ]
+          },
+          "ws-1": {
+            "carrier": "WS",
+            "depart": "06:50",
+            "minutes": [
+              150
+            ]
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "ac-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 30500
+          },
+          {
+            "slot": "O2",
+            "flight": "ac-2",
+            "cabin": "ECONOMY",
+            "fare_cents": 40000
+          },
+          {
+            "slot": "O3",
+            "flight": "ws-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 43500
+          },
+          {
+            "slot": "O4",
+            "flight": "ac-2",
+            "cabin": "BUSINESS",
+            "fare_cents": 118000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "BOOK",
+    "offer_slots": [
+      "O2"
+    ],
+    "cabins": [
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "LOWEST_FARE"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
+    ],
+    "clauses": [
+      "CANADA_USA_TRANSPORTATION",
+      "EMPLOYER_AUTHORIZATION"
+    ],
+    "unclear_phrase": ""
+  },
+  "must_keep": [
+    {
+      "lines": [
+        119,
+        119
+      ],
+      "sha256": "251ff2668e4d5ea1d79dc290d1e26149adae73c697537605863d682a3434eaac",
+      "quote": "The employer has the responsibility to authorize and determine when government travel is necessary, and to ensure that all travel arrangements are consistent with the provisions of this directive. Following consultation between the employer and the employee, the determination of travel arrangements shall best accommodate the employee's needs and interests and the employer's operational requirements.",
+      "why": "R06 1.1.1: approval: consultation and arrangements"
+    },
+    {
+      "lines": [
+        607,
+        609
+      ],
+      "sha256": "60dd01cee87deb62ce557930c584438db6cb2a04c349ff3c4e99c8093d73d739",
+      "quote": "The provisions outlined in this travel module apply when a traveller is away from the workplace on government travel overnight, in Canada or in the continental USA",
+      "why": "R12 3.3: scope: Module 3 (domestic)"
+    },
+    {
+      "lines": [
+        769,
+        769
+      ],
+      "sha256": "2f377fd215151e3c4d5a7b798c40650cfb726c6add6e1906d09ab6fd0b8baf4d",
+      "quote": "The standard for air travel is economy class. The lowest available airfares appropriate to particular itineraries shall be sought and bookings shall be made as far in advance as possible.",
+      "why": "R14 3.3.11: cabin + lowest fare + advance booking (Module 3)"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design toronto-winnipeg-treaty-session. Cheapest offer lands 09:40 local, after the 09:30 start: not 'appropriate to particular itineraries'. Winnipeg is one hour behind Toronto, so a 150-min block shows a 90-min clock difference.",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "CANADA",
+    "intent": "NEUTRAL",
+    "kind": "FLIGHT"
+  }
+}

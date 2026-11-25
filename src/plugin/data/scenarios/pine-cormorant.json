@@ -1,0 +1,167 @@
+{
+  "id": "pine-cormorant",
+  "category": "multi_rule",
+  "overlays": [],
+  "twin_of": "",
+  "twin_fact": "",
+  "flag_twins": [],
+  "ambiguity_note": "none",
+  "request": "Please put me on KLM to Amsterdam for the review conference in The Hague. I'm only a few trips away from the next status tier with them.",
+  "trip": {
+    "traveller_title": "analyst",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [],
+    "origin": "YYZ",
+    "origin_state_or_province": "Ontario",
+    "destination": "AMS",
+    "destination_state_or_province": "",
+    "depart_date": "2026-12-14",
+    "return_date": "2026-12-17",
+    "booking_date": "2026-12-02",
+    "purpose": "review conference at The Hague",
+    "authority_kind": "WRITTEN_TRIP_AUTHORITY",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "the traveller's director",
+    "authority_covers": "",
+    "assignment_location": "",
+    "travel_status_start": "",
+    "travel_status_end": "",
+    "continuous_travel_status": false,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [
+      "KLM"
+    ],
+    "itinerary_note": "",
+    "other_notes": []
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "outbound",
+        "origin": "YYZ",
+        "destination": "AMS",
+        "date": "2026-12-14",
+        "return_date": "",
+        "background": 0,
+        "flights": {
+          "ac-1": {
+            "carrier": "AC",
+            "depart": "08:15",
+            "minutes": [
+              435
+            ]
+          },
+          "kl-1": {
+            "carrier": "KL",
+            "depart": "11:05",
+            "minutes": [
+              435
+            ]
+          },
+          "ac-2": {
+            "carrier": "AC",
+            "depart": "11:05",
+            "minutes": [
+              435
+            ]
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "ac-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 101000
+          },
+          {
+            "slot": "O2",
+            "flight": "kl-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 122000
+          },
+          {
+            "slot": "O3",
+            "flight": "ac-2",
+            "cabin": "ECONOMY",
+            "fare_cents": 106000
+          },
+          {
+            "slot": "O4",
+            "flight": "ac-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 438000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "BOOK",
+    "offer_slots": [
+      "O1"
+    ],
+    "cabins": [
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "LOWEST_FARE"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
+    ],
+    "clauses": [
+      "INTERNATIONAL_TRANSPORTATION",
+      "LOYALTY_PROGRAMS"
+    ],
+    "unclear_phrase": ""
+  },
+  "must_keep": [
+    {
+      "lines": [
+        127,
+        127
+      ],
+      "sha256": "f7b71504ebd510329b8b2fed939691d624a3db8e6ebb7c20e320f0c9b83cab46",
+      "quote": "Provided that there are no additional costs to the Crown, employees travelling on government business can join loyalty programs and retain benefits offered by the travel industry for business or personal use.",
+      "why": "R08 1.2.1: loyalty programs"
+    },
+    {
+      "lines": [
+        849,
+        851
+      ],
+      "sha256": "2825858468b35c38e288da8de4bc65f4db15d99be09ec8088d74d619a40c45d7",
+      "quote": "The provisions outlined in this module apply when a traveller is away from the workplace on government travel overnight, outside Canada or the continental USA or when the point of departure is outside of Canada or the continental USA",
+      "why": "R15 3.4: scope: Module 4 (international)"
+    },
+    {
+      "lines": [
+        1017,
+        1017
+      ],
+      "sha256": "2f377fd215151e3c4d5a7b798c40650cfb726c6add6e1906d09ab6fd0b8baf4d",
+      "quote": "The standard for air travel is economy class. The lowest available airfares appropriate to particular itineraries shall be sought and bookings shall be made as far in advance as possible.",
+      "why": "R17 3.4.11: cabin + lowest fare + advance booking (Module 4)"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design toronto-amsterdam-chemical-weapons-review. The loyalty carrier costs 210 more than the cheapest economy; 1.2.1 allows loyalty benefits only at no additional cost to the Crown, and the lowest available airfare is sought.",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "INTERNATIONAL",
+    "intent": "LOYALTY_CARRIER",
+    "kind": "FLIGHT"
+  }
+}

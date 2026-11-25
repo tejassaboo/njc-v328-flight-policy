@@ -1,0 +1,150 @@
+{
+  "id": "cobalt-heron",
+  "category": "easy",
+  "overlays": [],
+  "twin_of": "",
+  "twin_fact": "",
+  "flag_twins": [],
+  "ambiguity_note": "none",
+  "request": "Please book my flight down to Washington for the briefings at the embassy next week.",
+  "trip": {
+    "traveller_title": "analyst",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [],
+    "origin": "YOW",
+    "origin_state_or_province": "Ontario",
+    "destination": "DCA",
+    "destination_state_or_province": "District of Columbia",
+    "depart_date": "2026-12-08",
+    "return_date": "2026-12-10",
+    "booking_date": "2026-12-01",
+    "purpose": "briefings at the Canadian embassy",
+    "authority_kind": "WRITTEN_TRIP_AUTHORITY",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "the traveller's director",
+    "authority_covers": "",
+    "assignment_location": "",
+    "travel_status_start": "",
+    "travel_status_end": "",
+    "continuous_travel_status": false,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [],
+    "itinerary_note": "",
+    "other_notes": []
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "outbound",
+        "origin": "YOW",
+        "destination": "DCA",
+        "date": "2026-12-08",
+        "return_date": "",
+        "background": 0,
+        "flights": {
+          "aa-1": {
+            "carrier": "AA",
+            "depart": "08:15",
+            "minutes": [
+              95
+            ]
+          },
+          "aa-2": {
+            "carrier": "AA",
+            "depart": "11:05",
+            "minutes": [
+              95
+            ]
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "aa-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 41200
+          },
+          {
+            "slot": "O2",
+            "flight": "aa-2",
+            "cabin": "ECONOMY",
+            "fare_cents": 46800
+          },
+          {
+            "slot": "O3",
+            "flight": "aa-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 53000,
+            "refundable": true
+          },
+          {
+            "slot": "O4",
+            "flight": "aa-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 121000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "BOOK",
+    "offer_slots": [
+      "O1"
+    ],
+    "cabins": [
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "LOWEST_FARE"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
+    ],
+    "clauses": [
+      "CANADA_USA_MODULE",
+      "CANADA_USA_TRANSPORTATION"
+    ],
+    "unclear_phrase": ""
+  },
+  "must_keep": [
+    {
+      "lines": [
+        607,
+        609
+      ],
+      "sha256": "60dd01cee87deb62ce557930c584438db6cb2a04c349ff3c4e99c8093d73d739",
+      "quote": "The provisions outlined in this travel module apply when a traveller is away from the workplace on government travel overnight, in Canada or in the continental USA",
+      "why": "R12 3.3: scope: Module 3 (domestic)"
+    },
+    {
+      "lines": [
+        769,
+        769
+      ],
+      "sha256": "2f377fd215151e3c4d5a7b798c40650cfb726c6add6e1906d09ab6fd0b8baf4d",
+      "quote": "The standard for air travel is economy class. The lowest available airfares appropriate to particular itineraries shall be sought and bookings shall be made as far in advance as possible.",
+      "why": "R14 3.3.11: cabin + lowest fare + advance booking (Module 3)"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design ottawa-washington-briefing.",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "US_CONTINENTAL",
+    "intent": "NEUTRAL",
+    "kind": "FLIGHT"
+  }
+}

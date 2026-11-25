@@ -1,0 +1,170 @@
+{
+  "id": "maple-osprey",
+  "category": "distractor",
+  "overlays": [
+    "personal_travel",
+    "upgrade_not_taken"
+  ],
+  "twin_of": "",
+  "twin_fact": "",
+  "flag_twins": [],
+  "ambiguity_note": "none",
+  "request": "Cheapest economy to Seoul for the fisheries talks, please, but make it a changeable ticket since I might stay on for a few days of holiday afterwards.",
+  "trip": {
+    "traveller_title": "analyst",
+    "traveller_kind": "EMPLOYEE",
+    "workplace": "Ottawa, Ontario, Canada",
+    "companions": [],
+    "origin": "YVR",
+    "origin_state_or_province": "British Columbia",
+    "destination": "ICN",
+    "destination_state_or_province": "",
+    "depart_date": "2027-01-11",
+    "return_date": "2027-01-15",
+    "booking_date": "2026-12-16",
+    "purpose": "bilateral fisheries talks",
+    "authority_kind": "WRITTEN_TRIP_AUTHORITY",
+    "authority_issued_to": "INDIVIDUAL",
+    "authority_given_by": "the traveller's director",
+    "authority_covers": "",
+    "assignment_location": "",
+    "travel_status_start": "",
+    "travel_status_end": "",
+    "continuous_travel_status": false,
+    "weekend_trips_home_taken": 0,
+    "must_stay_at_duty_location": false,
+    "visitor_relationship": "",
+    "visitor_home": "",
+    "physician_opinion": "",
+    "ground_minutes_to_departure_terminal": 0,
+    "ground_minutes_from_arrival_terminal": 0,
+    "rest_period_on_arrival": "",
+    "meeting_starts_local": "",
+    "airport_to_venue_minutes": 0,
+    "loyalty_programs": [],
+    "itinerary_note": "",
+    "other_notes": []
+  },
+  "world": {
+    "searches": [
+      {
+        "name": "outbound",
+        "origin": "YVR",
+        "destination": "ICN",
+        "date": "2027-01-11",
+        "return_date": "",
+        "background": 0,
+        "flights": {
+          "ac-1": {
+            "carrier": "AC",
+            "depart": "08:15",
+            "minutes": [
+              660
+            ]
+          },
+          "ke-1": {
+            "carrier": "KE",
+            "depart": "11:05",
+            "minutes": [
+              660
+            ]
+          }
+        },
+        "offers": [
+          {
+            "slot": "O1",
+            "flight": "ac-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 109000
+          },
+          {
+            "slot": "O2",
+            "flight": "ac-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 139500,
+            "refundable": true
+          },
+          {
+            "slot": "O3",
+            "flight": "ke-1",
+            "cabin": "ECONOMY",
+            "fare_cents": 115000
+          },
+          {
+            "slot": "O4",
+            "flight": "ac-1",
+            "cabin": "BUSINESS",
+            "fare_cents": 548000
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "decision": "BOOK",
+    "offer_slots": [
+      "O1"
+    ],
+    "cabins": [
+      "ECONOMY"
+    ],
+    "reason_codes": [
+      "LOWEST_FARE"
+    ],
+    "approvers": [
+      "EMPLOYER",
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
+    ],
+    "clauses": [
+      "INTERNATIONAL_TRANSPORTATION"
+    ],
+    "unclear_phrase": ""
+  },
+  "must_keep": [
+    {
+      "lines": [
+        849,
+        851
+      ],
+      "sha256": "2825858468b35c38e288da8de4bc65f4db15d99be09ec8088d74d619a40c45d7",
+      "quote": "The provisions outlined in this module apply when a traveller is away from the workplace on government travel overnight, outside Canada or the continental USA or when the point of departure is outside of Canada or the continental USA",
+      "why": "R15 3.4: scope: Module 4 (international)"
+    },
+    {
+      "lines": [
+        1017,
+        1017
+      ],
+      "sha256": "2f377fd215151e3c4d5a7b798c40650cfb726c6add6e1906d09ab6fd0b8baf4d",
+      "quote": "The standard for air travel is economy class. The lowest available airfares appropriate to particular itineraries shall be sought and bookings shall be made as far in advance as possible.",
+      "why": "R17 3.4.11: cabin + lowest fare + advance booking (Module 4)"
+    },
+    {
+      "lines": [
+        1019,
+        1019
+      ],
+      "sha256": "ba236b7b30f2d8e61755954628ddd4bfe529ec2616b1bcd28e0eab8f7715d2c2",
+      "quote": "Where available, business/executive class air travel shall be authorized where continuous air travel exceeds nine hours. Continuous air travel starts at the scheduled flight departure time and ends with the arrival at destination terminal or with an overnight stop or layover equivalent to an overnight stop. In the event that business/executive class air travel is not available, any lower fare class shall be authorized, where available.",
+      "why": "R18 3.4.11: cabin: business when continuous air travel exceeds nine hours; duration definition; lower class"
+    },
+    {
+      "lines": [
+        1003,
+        1003
+      ],
+      "sha256": "d8cb262c1553420478fc2c3e90f6cebc2635ad063320c9c0062217b99ed4f4c2",
+      "quote": "public carrier ticket \"change fee\" for legitimate authorized official government purposes; and",
+      "why": "R19 3.4.11 (also 3.3.11 line 755): refundability / change fees"
+    }
+  ],
+  "distractors": [],
+  "design_notes": "Design vancouver-seoul-fisheries-talks. Flexibility is wanted for personal plans; change fees are reimbursed only for official purposes, so the dearer changeable fare is not the lowest appropriate airfare.",
+  "answer_key_inputs": {
+    "origin_region": "CANADA",
+    "destination_region": "INTERNATIONAL",
+    "intent": "CHEAPEST",
+    "kind": "FLIGHT"
+  }
+}
