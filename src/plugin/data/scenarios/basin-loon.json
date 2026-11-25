@@ -6,7 +6,7 @@
   "twin_fact": "",
   "flag_twins": [],
   "ambiguity_note": "none",
-  "request": "I'm escorting a removal case to Mexico City. Counting the pickup at the holding centre it's a long day, so please give me the roomiest seat I'm allowed.",
+  "request": "I'm escorting a removal case to Mexico City. Counting the pickup at the holding centre it's a long day, so please put me in business class if I'm entitled to it.",
   "trip": {
     "traveller_title": "escort officer",
     "traveller_kind": "EMPLOYEE",
@@ -102,7 +102,6 @@
     ],
     "reason_codes": [
       "LONG_FLIGHT_CONDITION_NOT_MET",
-      "LOWEST_FARE",
       "UPGRADE_NOT_ELIGIBLE"
     ],
     "approvers": [

@@ -59,3 +59,22 @@ The fixed reason sets can be re-checked with iron-plover, maple-osprey and yew-c
 change needs no run. Re-graded against the new accept sets, 21 of the 24 submitted answers pass as they
 stand: the 18 approver-only failures plus iron-plover, maple-osprey and yew-coulee. The 3 that still fail are
 the model slips (alder-fiddle, boreal-quill, lichen-arch).
+
+## Declined requests (lead's decision after the review, template APPROVER_REVIEW.md)
+
+The booking task's instructions now end: "When you book something other than what the traveller asked for, the
+reason code gives why their request is declined." Accept sets follow it:
+
+- The seven economy bookings that decline the better cabin (basin-loon, cairn-thistle, fern-gable, fjord-clover,
+  ochre-marten, quarry-tern, wheat-bittern) no longer accept `LOWEST_FARE`. The ground is line 1019's condition,
+  so they accept `UPGRADE_NOT_ELIGIBLE` or `LONG_FLIGHT_CONDITION_NOT_MET`.
+- The requests of that family asked for "the best seat I'm allowed", which names no cabin; the paid run answered
+  `LOWEST_FARE` on 3 of the 5 it booked right. All 18 requests of the family (granted, declined and held) now ask
+  for "business class if I'm entitled to it", in the same words for every twin. No world or answer changed.
+- pine-cormorant (KLM for the status tier) is declined because KLM costs more (lines 127, 1017): the lowest-fare
+  rule is the ground, so `LOWEST_FARE` stays and `LOYALTY_PROGRAM_PREFERENCE` is accepted beside it.
+- maple-osprey (changeable fare for personal plans) keeps both codes for the same reason.
+- Untouched, nothing asked for is declined: cobalt-heron, eastern-larch, upland-sorrel, slate-yarrow,
+  granite-wren, kelp-lantern, dawn-trillium, and every business or premium economy booking.
+
+`MAX_PASS_ALWAYS_LOWEST` goes from 15 to 8 of 32 (measured).

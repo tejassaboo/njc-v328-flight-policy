@@ -47,10 +47,11 @@ ID_CATEGORY_ENUMS = [contract.PersonKind, contract.AuthorityKind, contract.Issue
 # is the cheapest seat listed; set to what it passes (see README).
 # The always-flag agent passes exactly the three holds over unclear words (it is given the held offer).
 MAX_PASS_ALWAYS_FLAG = 3
-# Its approver is NONE, which every booking accepts again since the approver amendment after the 2026-11-24
-# re-validation (template SYNC_NOTES 4': a sign-off already on file accepts that role and NONE), so it passes
-# the 15 bookings whose right answer is the cheapest seat listed.
-MAX_PASS_ALWAYS_LOWEST = 15
+# Its approver is NONE, which every booking accepts (template SYNC_NOTES 4'). Its reason is LOWEST_FARE, which a
+# booking that declines the cabin asked for no longer accepts (template APPROVER_REVIEW, declined requests), so
+# it passes the 8 cheapest-seat bookings where nothing asked for is declined on another ground: cobalt-heron,
+# dawn-trillium, eastern-larch, granite-wren, kelp-lantern, maple-osprey, pine-cormorant, upland-sorrel.
+MAX_PASS_ALWAYS_LOWEST = 8
 
 # Hand-built duration cases beyond the automatic both-sides tests: (rule, outbound scheduled minutes per
 # flight, layovers, expected True / False / None for unclear). The test itinerary leaves JFK at 08:00 local

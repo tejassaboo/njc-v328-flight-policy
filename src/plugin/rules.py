@@ -452,9 +452,18 @@ def flight(trip, offers, hidden):
         reasons = [ReasonCode.LOWEST_FARE]
         why = "Lines 769 and 1017: economy is the standard and the lowest appropriate fare is sought"
         if intent == "BEST_ALLOWED":
-            # In Module 3 the only long-flight rule (line 1019, Module 4) cannot be met either.
-            reasons += [ReasonCode.UPGRADE_NOT_ELIGIBLE, ReasonCode.LONG_FLIGHT_CONDITION_NOT_MET]
+            # The traveller asked for business class and it is declined: the reason says why (task instructions).
+            # The ground is line 1019's condition, not the lowest-fare rule, so LOWEST_FARE is not accepted. In
+            # Module 3 the only long-flight rule (line 1019, Module 4) cannot be met either.
+            reasons = [ReasonCode.UPGRADE_NOT_ELIGIBLE, ReasonCode.LONG_FLIGHT_CONDITION_NOT_MET]
             why += "; no block of continuous air travel is over nine hours, or the trip is in Module 3"
+        elif intent == "LOYALTY_CARRIER":
+            # The airline asked for is declined because it costs more (lines 127 and 1017): the lowest-fare rule
+            # is the ground, and the loyalty code names the declined wish.
+            if not any(o.fare_cents > chosen[0].fare_cents for o in usable if o.cabin == target):
+                raise ValueError("a declined loyalty airline needs a dearer economy offer")
+            reasons.append(ReasonCode.LOYALTY_PROGRAM_PREFERENCE)
+            why += "; a loyalty programme may add no cost (line 127)"
     if hidden.get("changeable_asked"):
         if target != Cabin.ECONOMY or not any(o.refundable and o.cabin == target for o in usable if o not in chosen):
             raise ValueError("a declined changeable fare needs a dearer refundable economy offer")

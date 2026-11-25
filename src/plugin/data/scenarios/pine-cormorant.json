@@ -114,7 +114,8 @@
       "ECONOMY"
     ],
     "reason_codes": [
-      "LOWEST_FARE"
+      "LOWEST_FARE",
+      "LOYALTY_PROGRAM_PREFERENCE"
     ],
     "approvers": [
       "EMPLOYER",

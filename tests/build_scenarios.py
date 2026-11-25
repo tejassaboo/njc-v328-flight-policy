@@ -116,6 +116,41 @@ SEARCH_FIXES = {
 }
 REQUEST_FIXES = {"kelp-lantern": ("in mid-January", "in late January"),
                  "harbour-sumac": ("in mid-January", "in late January")}
+
+# Declined requests (template APPROVER_REVIEW, declined requests). The task instructions now say: "When you
+# book something other than what the traveller asked for, the reason code gives why their request is declined."
+# A booking that declines the cabin asked for no longer accepts LOWEST_FARE (the ground is line 1019's condition).
+# The design's requests asked for "the best seat I'm allowed", which names no cabin: the paid run answered
+# LOWEST_FARE on 3 of 5 such economy bookings and never on LSU's "business class please if covered". Every
+# request of that family, granted, declined or held, now names business class in the same words, so twins still
+# differ only in their fact. pine-cormorant declines the airline because it costs more (lines 127, 1017): the
+# lowest-fare rule is the ground, so LOWEST_FARE stays and the loyalty code is accepted beside it.
+BUSINESS_IF = "business class if I'm entitled to it"
+REQUEST_FIXES.update({
+    "basin-loon": ("please give me the roomiest seat I'm allowed", f"please put me in {BUSINESS_IF}"),
+    "boreal-quill": ("best seat I'm allowed", BUSINESS_IF),
+    "cairn-thistle": ("best seat I'm allowed", BUSINESS_IF),
+    "jade-tamarack": ("best seat I'm allowed", BUSINESS_IF),
+    "rapids-aster": ("best seat I'm allowed", BUSINESS_IF),
+    "delta-moss": ("give me the best seat I'm allowed", f"put me in {BUSINESS_IF}"),
+    "fjord-clover": ("give me the best seat I'm allowed", f"put me in {BUSINESS_IF}"),
+    "esker-finch": ("in the best seat I'm allowed", f"in {BUSINESS_IF}"),
+    "fern-gable": ("I'd like the best seat I'm allowed", f"I'd like {BUSINESS_IF}"),
+    "wheat-bittern": ("I'd like the best seat I'm allowed", f"I'd like {BUSINESS_IF}"),
+    "iron-plover": ("I'd like the best seat I'm allowed", f"I'd like {BUSINESS_IF}"),
+    "glacier-vetch": ("I'd like the best seat the rules let me have", f"I'd like {BUSINESS_IF}"),
+    "heath-sculpin": ("Please get me the best seat I'm allowed on the flight over",
+                      "Please get me business class on the flight over if I'm entitled to it"),
+    "lichen-arch": ("with the best seat I'm allowed", f"in {BUSINESS_IF}"),
+    "quarry-tern": ("with the best seat I'm allowed", f"in {BUSINESS_IF}"),
+    "violet-muskeg": ("with the best seat I'm allowed", f"in {BUSINESS_IF}"),
+    "ochre-marten": ("Could you book me the nicest seat I'm entitled to for",
+                     "Could you book me business class, if I'm entitled to it, for"),
+    "talus-cedar": ("Best seat I'm allowed, please", "Business class if I'm entitled to it, please"),
+})
+DECLINED_DROPS = {sid: ["LOWEST_FARE"] for sid in (
+    "basin-loon", "cairn-thistle", "fern-gable", "fjord-clover", "ochre-marten", "quarry-tern", "wheat-bittern")}
+DECLINED_REASONS = {"pine-cormorant": ["LOYALTY_PROGRAM_PREFERENCE"]}
 KELP_HARBOUR = ("travel status 64 days, 2026-12-01 to 2027-02-03 (52 elapsed by the trip home on 2027-01-22), or "
                 "45 days, 2026-12-14 to 2027-01-28 (39 elapsed)")
 TWIN_FACTS = {"kelp-lantern": KELP_HARBOUR, "harbour-sumac": KELP_HARBOUR}
@@ -335,8 +370,9 @@ def expected(sid, design):
     slots = exp["offer_tags"] if decision == "BOOK" else exp["hold_tags"]
     tags = {o["tag"]: o for g in design["offer_constraints"]["groups"] for o in g["offers"]}
     cabins = sorted({tags[slot]["cabin"].upper() for slot in slots}) or ["NONE"]
-    reasons = sorted({REASON[code] for code in exp["reason_accept"]} | set(EXTRA_REASONS.get(sid, []))
-                     | set(AUDIT_REASONS.get(sid, [])) | set(REVALIDATION_REASONS.get(sid, [])))
+    reasons = sorted(({REASON[code] for code in exp["reason_accept"]} | set(EXTRA_REASONS.get(sid, []))
+                      | set(AUDIT_REASONS.get(sid, [])) | set(REVALIDATION_REASONS.get(sid, []))
+                      | set(DECLINED_REASONS.get(sid, []))) - set(DECLINED_DROPS.get(sid, [])))
     approvers = set(exp["approver_accept"]) | set(AUDIT_APPROVERS.get(sid, []))
     if decision == "BOOK":
         approvers.add("NONE")

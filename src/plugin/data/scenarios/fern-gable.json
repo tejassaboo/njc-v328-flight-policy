@@ -6,7 +6,7 @@
   "twin_fact": "",
   "flag_twins": [],
   "ambiguity_note": "none",
-  "request": "Door to door from the North Shore this is a really long day before I even land in Madrid, so I'd like the best seat I'm allowed.",
+  "request": "Door to door from the North Shore this is a really long day before I even land in Madrid, so I'd like business class if I'm entitled to it.",
   "trip": {
     "traveller_title": "legal counsel",
     "traveller_kind": "EMPLOYEE",
@@ -100,7 +100,6 @@
     ],
     "reason_codes": [
       "LONG_FLIGHT_CONDITION_NOT_MET",
-      "LOWEST_FARE",
       "UPGRADE_NOT_ELIGIBLE"
     ],
     "approvers": [

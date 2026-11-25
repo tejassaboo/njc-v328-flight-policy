@@ -6,7 +6,7 @@
   "twin_fact": "scheduled nonstop 540 min (twin 541)",
   "flag_twins": [],
   "ambiguity_note": "none",
-  "request": "Please book the energy talks trip to Sao Paulo, best seat I'm allowed. Heads up: that flight is almost always late, so in practice it's a longer day than the timetable says.",
+  "request": "Please book the energy talks trip to Sao Paulo, business class if I'm entitled to it. Heads up: that flight is almost always late, so in practice it's a longer day than the timetable says.",
   "trip": {
     "traveller_title": "analyst",
     "traveller_kind": "EMPLOYEE",
@@ -100,7 +100,6 @@
     ],
     "reason_codes": [
       "LONG_FLIGHT_CONDITION_NOT_MET",
-      "LOWEST_FARE",
       "UPGRADE_NOT_ELIGIBLE"
     ],
     "approvers": [

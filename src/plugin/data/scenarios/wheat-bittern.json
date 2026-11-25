@@ -8,7 +8,7 @@
   "twin_fact": "continental USA destination, 555 min (twin: Hawaii)",
   "flag_twins": [],
   "ambiguity_note": "none",
-  "request": "It's a long haul from Whitehorse all the way to Orlando for the conference, so I'd like the best seat I'm allowed, please.",
+  "request": "It's a long haul from Whitehorse all the way to Orlando for the conference, so I'd like business class if I'm entitled to it, please.",
   "trip": {
     "traveller_title": "analyst",
     "traveller_kind": "EMPLOYEE",
@@ -116,7 +116,6 @@
     ],
     "reason_codes": [
       "LONG_FLIGHT_CONDITION_NOT_MET",
-      "LOWEST_FARE",
       "UPGRADE_NOT_ELIGIBLE"
     ],
     "approvers": [

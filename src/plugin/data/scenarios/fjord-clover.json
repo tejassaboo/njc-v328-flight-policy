@@ -8,7 +8,7 @@
   "twin_fact": "connection at London 60 min: continuous air 540 min",
   "flag_twins": [],
   "ambiguity_note": "none",
-  "request": "I need to be in Edinburgh for meetings. Please book the trip through London, and give me the best seat I'm allowed.",
+  "request": "I need to be in Edinburgh for meetings. Please book the trip through London, and put me in business class if I'm entitled to it.",
   "trip": {
     "traveller_title": "analyst",
     "traveller_kind": "EMPLOYEE",
@@ -116,7 +116,6 @@
     ],
     "reason_codes": [
       "LONG_FLIGHT_CONDITION_NOT_MET",
-      "LOWEST_FARE",
       "UPGRADE_NOT_ELIGIBLE"
     ],
     "approvers": [

@@ -8,7 +8,7 @@
   "twin_fact": "",
   "flag_twins": [],
   "ambiguity_note": "none",
-  "request": "I'm heading to the trade mission in Delhi. Please get me the best seat I'm allowed on the flight over.",
+  "request": "I'm heading to the trade mission in Delhi. Please get me business class on the flight over if I'm entitled to it.",
   "trip": {
     "traveller_title": "analyst",
     "traveller_kind": "EMPLOYEE",
