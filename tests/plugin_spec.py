@@ -47,7 +47,9 @@ ID_CATEGORY_ENUMS = [contract.PersonKind, contract.AuthorityKind, contract.Issue
 # is the cheapest seat listed; set to what it passes (see README).
 # The always-flag agent passes exactly the three holds over unclear words (it is given the held offer).
 MAX_PASS_ALWAYS_FLAG = 3
-MAX_PASS_ALWAYS_LOWEST = 15
+# Its approver is NONE, which no booking accepts since the 2026-11-24 approver wording (every booking relies
+# on the travel authorization on file), so it passes none; naming the authorizer it would pass 15.
+MAX_PASS_ALWAYS_LOWEST = 0
 
 # Hand-built duration cases beyond the automatic both-sides tests: (rule, outbound scheduled minutes per
 # flight, layovers, expected True / False / None for unclear). The test itinerary leaves JFK at 08:00 local

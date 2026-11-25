@@ -19,7 +19,7 @@
     "destination": "GRU",
     "destination_state_or_province": "",
     "depart_date": "2026-12-09",
-    "return_date": "2026-12-13",
+    "return_date": "",
     "booking_date": "2026-12-01",
     "purpose": "mining investment forum",
     "authority_kind": "WRITTEN_TRIP_AUTHORITY",
@@ -106,8 +106,7 @@
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY",
-      "NONE"
+      "MANAGER_DELEGATED_AUTHORITY"
     ],
     "clauses": [
       "INTERNATIONAL_TRANSPORTATION"

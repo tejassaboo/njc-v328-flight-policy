@@ -19,7 +19,7 @@
     "destination": "YWG",
     "destination_state_or_province": "Manitoba",
     "depart_date": "2026-12-08",
-    "return_date": "2026-12-09",
+    "return_date": "",
     "booking_date": "2026-12-01",
     "purpose": "treaty negotiation session",
     "authority_kind": "WRITTEN_TRIP_AUTHORITY",
@@ -118,8 +118,7 @@
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY",
-      "NONE"
+      "MANAGER_DELEGATED_AUTHORITY"
     ],
     "clauses": [
       "CANADA_USA_TRANSPORTATION",

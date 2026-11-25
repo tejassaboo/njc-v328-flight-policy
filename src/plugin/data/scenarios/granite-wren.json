@@ -21,7 +21,7 @@
     "destination": "NBO",
     "destination_state_or_province": "",
     "depart_date": "2026-12-16",
-    "return_date": "2026-12-30",
+    "return_date": "",
     "booking_date": "2026-12-15",
     "purpose": "next-of-kin travel to a hospitalized employee",
     "authority_kind": "WRITTEN_TRIP_AUTHORITY",
@@ -123,8 +123,7 @@
     "approvers": [
       "ATTENDING_PHYSICIAN",
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY",
-      "NONE"
+      "MANAGER_DELEGATED_AUTHORITY"
     ],
     "clauses": [
       "NEXT_OF_KIN"

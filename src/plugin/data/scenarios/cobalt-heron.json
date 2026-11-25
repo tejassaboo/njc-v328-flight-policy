@@ -17,7 +17,7 @@
     "destination": "DCA",
     "destination_state_or_province": "District of Columbia",
     "depart_date": "2026-12-08",
-    "return_date": "2026-12-10",
+    "return_date": "",
     "booking_date": "2026-12-01",
     "purpose": "briefings at the Canadian embassy",
     "authority_kind": "WRITTEN_TRIP_AUTHORITY",
@@ -110,8 +110,7 @@
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY",
-      "NONE"
+      "MANAGER_DELEGATED_AUTHORITY"
     ],
     "clauses": [
       "CANADA_USA_MODULE",

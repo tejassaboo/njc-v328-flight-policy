@@ -19,7 +19,7 @@
     "destination": "MCO",
     "destination_state_or_province": "Florida",
     "depart_date": "2026-12-07",
-    "return_date": "2026-12-11",
+    "return_date": "",
     "booking_date": "2026-12-01",
     "purpose": "emergency management conference",
     "authority_kind": "WRITTEN_TRIP_AUTHORITY",
@@ -121,8 +121,7 @@
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY",
-      "NONE"
+      "MANAGER_DELEGATED_AUTHORITY"
     ],
     "clauses": [
       "CANADA_USA_MODULE",

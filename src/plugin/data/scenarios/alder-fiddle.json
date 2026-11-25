@@ -27,7 +27,7 @@
     "destination": "YYC",
     "destination_state_or_province": "Alberta",
     "depart_date": "2026-12-14",
-    "return_date": "2026-12-17",
+    "return_date": "",
     "booking_date": "2026-12-07",
     "purpose": "field audit",
     "authority_kind": "BLANKET_TRAVEL_AUTHORITY",

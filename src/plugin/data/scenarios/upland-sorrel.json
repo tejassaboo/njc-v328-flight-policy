@@ -19,7 +19,7 @@
     "destination": "HKG",
     "destination_state_or_province": "",
     "depart_date": "2026-12-14",
-    "return_date": "2026-12-19",
+    "return_date": "",
     "booking_date": "2026-12-02",
     "purpose": "consultations",
     "authority_kind": "WRITTEN_TRIP_AUTHORITY",
@@ -105,8 +105,7 @@
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY",
-      "NONE"
+      "MANAGER_DELEGATED_AUTHORITY"
     ],
     "clauses": [
       "INTERNATIONAL_TRANSPORTATION"

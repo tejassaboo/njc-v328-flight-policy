@@ -7,10 +7,10 @@
     "outside_air_section"
   ],
   "twin_of": "kelp-lantern",
-  "twin_fact": "travel status 2026-12-14 to 2027-01-28: 45 days (46 counting both ends)",
+  "twin_fact": "travel status 64 days, 2026-12-01 to 2027-02-03 (52 elapsed by the trip home on 2027-01-22), or 45 days, 2026-12-14 to 2027-01-28 (39 elapsed)",
   "flag_twins": [],
   "ambiguity_note": "none",
-  "request": "I'm on assignment in London and would like to fly home to Ottawa for a weekend in mid-January. Can you set that up?",
+  "request": "I'm on assignment in London and would like to fly home to Ottawa for a weekend in late January. Can you set that up?",
   "trip": {
     "traveller_title": "policy analyst",
     "traveller_kind": "EMPLOYEE",
@@ -20,8 +20,8 @@
     "origin_state_or_province": "",
     "destination": "YOW",
     "destination_state_or_province": "Ontario",
-    "depart_date": "2027-01-15",
-    "return_date": "2027-01-17",
+    "depart_date": "2027-01-22",
+    "return_date": "2027-01-24",
     "booking_date": "2027-01-04",
     "purpose": "weekend trip home during assignment",
     "authority_kind": "WRITTEN_TRIP_AUTHORITY",
@@ -54,8 +54,8 @@
         "name": "employee_home",
         "origin": "LHR",
         "destination": "YOW",
-        "date": "2027-01-15",
-        "return_date": "2027-01-17",
+        "date": "2027-01-22",
+        "return_date": "2027-01-24",
         "background": 0,
         "flights": {
           "ba-1": {
@@ -156,7 +156,7 @@
     }
   ],
   "distractors": [],
-  "design_notes": "Design london-secondment-spring. Return direction 415 min, outbound 470 min: both under nine hours, so 3.4.11 never competes with 'most economical return airfare'. Port: reason accept set widened with ['NO_COMPLIANT_OFFER'] (shared reason list).",
+  "design_notes": "Design london-secondment-spring. Return direction 415 min, outbound 470 min: both under nine hours, so 3.4.11 never competes with 'most economical return airfare'. Port: reason accept set widened with ['NO_COMPLIANT_OFFER'] (shared reason list). Port: the trip home on 2027-01-22 (was 2027-01-15), with its twin kelp-lantern: 45 days in all and 39 elapsed, so no trip is earned on any reading of lines 1065-1075.",
   "answer_key_inputs": {
     "origin_region": "INTERNATIONAL",
     "destination_region": "CANADA",

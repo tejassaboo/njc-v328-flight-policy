@@ -53,6 +53,67 @@ EXTRA_REASONS = {
     "harbour-sumac": ["NO_COMPLIANT_OFFER"], "yew-coulee": ["NO_COMPLIANT_OFFER"],
 }
 
+# Plugin audit (commit bb9df6c): further defensible codes. Business (and premium economy on an entitled journey)
+# also accept LONG_FLIGHT_APPROVED, premium economy INTERNATIONAL_LONG_FLIGHT (line 1019); Module 3 best-seat
+# economy also LONG_FLIGHT_CONDITION_NOT_MET; holds over unclear words also NOT_NAMED; next-of-kin travel also
+# ATTENDING_PHYSICIAN (line 1149); weekend trips home and spouse visits that book also IMMEDIATE_SUPERVISOR
+# (line 1061); the family-holiday refusal also OUTSIDE_POLICY_SCOPE and EMPLOYER_AUTHORIZATION (lines 45, 119).
+LONG_APPROVED = ["LONG_FLIGHT_APPROVED"]
+AUDIT_REASONS = {
+    "arctic-lupine": ["OUTSIDE_POLICY_SCOPE"], "delta-moss": LONG_APPROVED, "glacier-vetch": LONG_APPROVED,
+    "heath-sculpin": LONG_APPROVED, "jade-tamarack": LONG_APPROVED, "rapids-aster": LONG_APPROVED,
+    "talus-cedar": LONG_APPROVED, "violet-muskeg": LONG_APPROVED,
+    "esker-finch": ["INTERNATIONAL_LONG_FLIGHT", "LONG_FLIGHT_APPROVED"], "wheat-bittern": ["LONG_FLIGHT_CONDITION_NOT_MET"],
+}
+AUDIT_APPROVERS = {
+    "boreal-quill": ["NOT_NAMED"], "iron-plover": ["NOT_NAMED"], "lichen-arch": ["NOT_NAMED"],
+    "dawn-trillium": ["IMMEDIATE_SUPERVISOR"], "kelp-lantern": ["IMMEDIATE_SUPERVISOR"],
+    "granite-wren": ["ATTENDING_PHYSICIAN"],
+}
+AUDIT_CLAUSES = {"arctic-lupine": ["EMPLOYER_AUTHORIZATION"]}
+
+# Approver wording (template, after the paid validation of 2026-11-24): the approver is "the role whose sign-off
+# this decision relies on, whether already on file or still awaited; NONE only when no one's sign-off is
+# involved at all". Every case that books relies on the travel authorization on file, so NONE is dropped from
+# every BOOK accept set (the design accepted it because it graded the approver only on holds).
+
+# Weekend-home timing (paid validation: kelp-lantern and yew-coulee were answered on weeks elapsed by the trip
+# date, the key counts the whole travel-status period). The dates move so that every reading of "Minimum of:
+# 7 weeks = 1 trip" (lines 1065-1075) gives the same count: weeks of the whole period, weeks elapsed by the trip,
+# and weeks counted from the directive's effective date (line 37, 2026-12-01; no date may precede it). The
+# kelp-lantern / harbour-sumac pair flies home on Friday 2027-01-22 (was 2027-01-15, "mid-January"), so a
+# travel status from 2026-12-01 has 52 days elapsed; dawn-trillium moves with its twin yew-coulee, so each pair
+# still differs in one fact.
+SHIFTED_HOME = {"depart_date": "2027-01-22", "return_date": "2027-01-24"}
+TRIP_FIXES = {
+    "kelp-lantern": {"travel_status_start": "2026-12-01", **SHIFTED_HOME},
+    "harbour-sumac": SHIFTED_HOME,
+    "yew-coulee": {"travel_status_start": "2026-12-14"},
+    "dawn-trillium": {"travel_status_start": "2026-12-14"},
+}
+SEARCH_FIXES = {
+    "kelp-lantern": {"employee_home": {"date": "2027-01-22", "return_date": "2027-01-24"}},
+    "harbour-sumac": {"employee_home": {"date": "2027-01-22", "return_date": "2027-01-24"}},
+}
+REQUEST_FIXES = {"kelp-lantern": ("in mid-January", "in late January"),
+                 "harbour-sumac": ("in mid-January", "in late January")}
+KELP_HARBOUR = ("travel status 64 days, 2026-12-01 to 2027-02-03 (52 elapsed by the trip home on 2027-01-22), or "
+                "45 days, 2026-12-14 to 2027-01-28 (39 elapsed)")
+TWIN_FACTS = {"kelp-lantern": KELP_HARBOUR, "harbour-sumac": KELP_HARBOUR}
+TIMING_NOTES = {
+    "kelp-lantern": ("Port: travel status from 2026-12-01 (was 2026-12-14) and the trip home on 2027-01-22 (was "
+                     "2027-01-15): 64 days in all (9 whole weeks), 52 elapsed by the trip (7 whole weeks), so one "
+                     "trip is earned on every reading of lines 1065-1075."),
+    "harbour-sumac": ("Port: the trip home on 2027-01-22 (was 2027-01-15), with its twin kelp-lantern: 45 days in "
+                      "all and 39 elapsed, so no trip is earned on any reading of lines 1065-1075."),
+    "yew-coulee": ("Port: travel status from 2026-12-14 (was 2027-01-04): 91 days in all (13 whole weeks, two "
+                   "trips) and 60 by the visit (8 whole weeks, one trip), so a trip is available on every reading "
+                   "and the visit is refused on cost alone (line 1097)."),
+    "dawn-trillium": ("Port: travel status from 2026-12-14 (was 2027-01-04), with its twin yew-coulee: a trip is "
+                      "available on every reading of lines 1065-1075, and the visit costs less than the trip home."),
+}
+
+
 UNCLEAR = {
     "boreal-quill": ("continental USA", [
         ("Alaska is not contiguous with the other states, so a trip there is outside 'the continental USA' "
@@ -255,9 +316,13 @@ def expected(sid, design):
     slots = exp["offer_tags"] if decision == "BOOK" else exp["hold_tags"]
     tags = {o["tag"]: o for g in design["offer_constraints"]["groups"] for o in g["offers"]}
     cabins = sorted({tags[slot]["cabin"].upper() for slot in slots}) or ["NONE"]
-    reasons = sorted({REASON[code] for code in exp["reason_accept"]} | set(EXTRA_REASONS.get(sid, [])))
-    approvers = sorted(set(exp["approver_accept"]))
-    clauses = sorted({CLAUSE[name] for name in exp["clause_accept"]})
+    reasons = sorted({REASON[code] for code in exp["reason_accept"]} | set(EXTRA_REASONS.get(sid, []))
+                     | set(AUDIT_REASONS.get(sid, [])))
+    approvers = set(exp["approver_accept"]) | set(AUDIT_APPROVERS.get(sid, []))
+    if decision == "BOOK":
+        approvers.discard("NONE")
+    approvers = sorted(approvers)
+    clauses = sorted({CLAUSE[name] for name in exp["clause_accept"]} | set(AUDIT_CLAUSES.get(sid, [])))
     phrase = UNCLEAR[sid][0] if sid in UNCLEAR else ""
     return {"decision": decision, "offer_slots": sorted(slots), "cabins": cabins, "reason_codes": reasons,
             "approvers": approvers, "clauses": clauses, "unclear_phrase": phrase}
@@ -292,6 +357,26 @@ def main():
             notes += " Port: must_keep Decision 1575 narrowed from lines 3214-3236 to 3214 and 3236."
         if sid in EXTRA_REASONS:
             notes += f" Port: reason accept set widened with {EXTRA_REASONS[sid]} (shared reason list)."
+        if sid in TIMING_NOTES:
+            notes += " " + TIMING_NOTES[sid]
+        trip = trip_record(design["trip_facts"], design)
+        for name, value in TRIP_FIXES.get(sid, {}).items():
+            assert name in trip, name
+            trip[name] = value
+        searches = [search(sid, group) for group in design["offer_constraints"]["groups"]]
+        for made in searches:
+            for name, value in SEARCH_FIXES.get(sid, {}).get(made["name"], {}).items():
+                made[name] = value
+        if not any(made["return_date"] for made in searches):
+            # One ticket per case (template convention, paid validation 2026-11-24 and the UC G-28 audit): a case
+            # whose ticket is one way gives no return date, which would invite a round-trip search; the return of
+            # the trip is booked separately and no rule here reads it.
+            trip["return_date"] = ""
+        request = design["request"]
+        if sid in REQUEST_FIXES:
+            old, new = REQUEST_FIXES[sid]
+            assert old in request, sid
+            request = request.replace(old, new)
         must_keep = []
         for entry in design["must_keep"]:
             if entry["lines"] == [3214, 3236]:
@@ -301,10 +386,10 @@ def main():
         scenario = {
             "id": sid, "category": category,
             "overlays": [OVERLAY.get(tag, tag) for tag in design["overlays"]],
-            "twin_of": design["twin_of"] or "", "twin_fact": design.get("twin_diff") or "",
+            "twin_of": design["twin_of"] or "", "twin_fact": TWIN_FACTS.get(sid, design.get("twin_diff") or ""),
             "flag_twins": FLAG_TWINS.get(sid, []), "ambiguity_note": note,
-            "request": design["request"], "trip": trip_record(design["trip_facts"], design),
-            "world": {"searches": [search(sid, group) for group in design["offer_constraints"]["groups"]]},
+            "request": request, "trip": trip,
+            "world": {"searches": searches},
             "expected": expected(sid, design),
             "must_keep": must_keep,
             "distractors": [], "design_notes": notes, "answer_key_inputs": hidden,

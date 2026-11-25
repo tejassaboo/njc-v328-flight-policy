@@ -27,8 +27,8 @@ def keyed():
 def test_every_date_is_on_or_after_the_effective_date():
     for data in ALL:
         trip = data["trip"]
-        dates = [trip["booking_date"], trip["depart_date"], trip["return_date"]]
-        dates += [trip[name] for name in ("travel_status_start", "travel_status_end") if trip[name]]
+        dates = [trip["booking_date"], trip["depart_date"]]
+        dates += [trip[name] for name in ("return_date", "travel_status_start", "travel_status_end") if trip[name]]
         for search in data["world"]["searches"]:
             dates += [search["date"]] + ([search["return_date"]] if search["return_date"] else [])
         assert all(days_between(EFFECTIVE, date) >= 0 for date in dates), data["id"]

@@ -95,19 +95,21 @@ INTENTS = ("BEST_ALLOWED", "CHEAPEST", "NEUTRAL", "LOYALTY_CARRIER")
 KINDS = ("FLIGHT", "NEXT_OF_KIN", "WEEKEND_HOME", "SPOUSE_VISIT", "WEEKEND_ALTERNATIVE", "PERSONAL")
 HIDDEN_KEYS = ("origin_region", "destination_region", "intent", "kind")
 
-# Accepted when a decision rests on an ordinary trip authority: the approver field is not what the case tests
-# (design: "approver graded only on FLAG"), so every reading of who stands behind the booking is accepted.
+# Accepted on a refusal: it relies on nobody's sign-off (NONE), and a reader may also name the employer who would
+# have to authorize the trip (the approver field is not what a refusal tests).
 ORDINARY = [Approver.NONE, Approver.MANAGER_DELEGATED_AUTHORITY, Approver.EMPLOYER]
-# Lines 119 and 145-153: the manager with delegated authority (the employer) authorizes travel.
+# Lines 119 and 145-153: the manager with delegated authority (the employer) authorizes travel. A booking relies
+# on that authorization, which is on file for every case that books (a case without one is refused), so NONE
+# ("no one's sign-off is involved at all") is not accepted on a booking.
 AUTHORIZER = [Approver.MANAGER_DELEGATED_AUTHORITY, Approver.EMPLOYER]
 # A hold over unclear words: the authorizer decides the arrangements (lines 119, 145-153), but the directive
 # names nobody who settles what its own undefined words mean, so NOT_NAMED is defensible too.
 UNCLEAR_HOLD = [*AUTHORIZER, Approver.NOT_NAMED]
 # Line 1149: next-of-kin travel rests on "the opinion of the attending physician".
-NEXT_OF_KIN_SIGN_OFF = [*ORDINARY, Approver.ATTENDING_PHYSICIAN]
+NEXT_OF_KIN_SIGN_OFF = [*AUTHORIZER, Approver.ATTENDING_PHYSICIAN]
 # Lines 1061 and 1097: a trip home (or a visit in its place) needs work schedules that permit the absence,
 # which the immediate supervisor confirms (lines 145-153 name the supervisor in the consultation).
-WEEKEND_SIGN_OFF = [*ORDINARY, Approver.IMMEDIATE_SUPERVISOR]
+WEEKEND_SIGN_OFF = [*AUTHORIZER, Approver.IMMEDIATE_SUPERVISOR]
 
 ALASKA_PHRASE = "continental USA"
 LAYOVER_PHRASE = "layover equivalent to an overnight stop"
@@ -452,4 +454,4 @@ def flight(trip, offers, hidden):
         clauses.append(Clause.LOYALTY_PROGRAMS)
     if any(has_overnight_stop(offer) for offer in usable):
         clauses.append(Clause.NJC_DECISION)
-    return answer(Decision.BOOK, chosen, reasons, ORDINARY, clauses, f"Module {module}. {why} ({numbers}).")
+    return answer(Decision.BOOK, chosen, reasons, AUTHORIZER, clauses, f"Module {module}. {why} ({numbers}).")

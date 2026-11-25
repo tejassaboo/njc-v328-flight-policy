@@ -17,7 +17,7 @@
     "destination": "AMS",
     "destination_state_or_province": "",
     "depart_date": "2026-12-14",
-    "return_date": "2026-12-17",
+    "return_date": "",
     "booking_date": "2026-12-02",
     "purpose": "review conference at The Hague",
     "authority_kind": "WRITTEN_TRIP_AUTHORITY",
@@ -118,8 +118,7 @@
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY",
-      "NONE"
+      "MANAGER_DELEGATED_AUTHORITY"
     ],
     "clauses": [
       "INTERNATIONAL_TRANSPORTATION",

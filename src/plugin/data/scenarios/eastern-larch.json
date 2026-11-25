@@ -17,7 +17,7 @@
     "destination": "YYZ",
     "destination_state_or_province": "Ontario",
     "depart_date": "2026-12-15",
-    "return_date": "2026-12-17",
+    "return_date": "",
     "booking_date": "2026-12-09",
     "purpose": "routine site inspection",
     "authority_kind": "BLANKET_TRAVEL_AUTHORITY",
@@ -103,8 +103,7 @@
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY",
-      "NONE"
+      "MANAGER_DELEGATED_AUTHORITY"
     ],
     "clauses": [
       "CANADA_USA_TRANSPORTATION",

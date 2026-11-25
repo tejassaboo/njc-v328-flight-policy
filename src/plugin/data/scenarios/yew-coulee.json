@@ -30,7 +30,7 @@
     "authority_given_by": "the traveller's director",
     "authority_covers": "the employee's assignment; the director agrees to a spouse visit in place of a trip home if the rules allow it",
     "assignment_location": "Paris, France",
-    "travel_status_start": "2027-01-04",
+    "travel_status_start": "2026-12-14",
     "travel_status_end": "2027-03-15",
     "continuous_travel_status": true,
     "weekend_trips_home_taken": 0,
@@ -215,7 +215,7 @@
     }
   ],
   "distractors": [],
-  "design_notes": "Design paris-assignment-partner-visit. 70 days of travel status earns one trip home (3.4.12); the spouse visit replaces it only at no additional cost. Port: reason accept set widened with ['NO_COMPLIANT_OFFER'] (shared reason list).",
+  "design_notes": "Design paris-assignment-partner-visit. 70 days of travel status earns one trip home (3.4.12); the spouse visit replaces it only at no additional cost. Port: reason accept set widened with ['NO_COMPLIANT_OFFER'] (shared reason list). Port: travel status from 2026-12-14 (was 2027-01-04): 91 days in all (13 whole weeks, two trips) and 60 by the visit (8 whole weeks, one trip), so a trip is available on every reading and the visit is refused on cost alone (line 1097).",
   "answer_key_inputs": {
     "origin_region": "CANADA",
     "destination_region": "INTERNATIONAL",

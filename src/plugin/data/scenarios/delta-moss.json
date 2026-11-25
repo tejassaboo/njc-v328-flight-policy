@@ -20,7 +20,7 @@
     "destination": "EDI",
     "destination_state_or_province": "",
     "depart_date": "2026-12-14",
-    "return_date": "2026-12-18",
+    "return_date": "",
     "booking_date": "2026-12-03",
     "purpose": "Arctic Council working group",
     "authority_kind": "WRITTEN_TRIP_AUTHORITY",
@@ -121,8 +121,7 @@
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY",
-      "NONE"
+      "MANAGER_DELEGATED_AUTHORITY"
     ],
     "clauses": [
       "INTERNATIONAL_TRANSPORTATION"
