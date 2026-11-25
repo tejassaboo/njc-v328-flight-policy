@@ -100,6 +100,14 @@ HIDDEN_KEYS = ("origin_region", "destination_region", "intent", "kind")
 ORDINARY = [Approver.NONE, Approver.MANAGER_DELEGATED_AUTHORITY, Approver.EMPLOYER]
 # Lines 119 and 145-153: the manager with delegated authority (the employer) authorizes travel.
 AUTHORIZER = [Approver.MANAGER_DELEGATED_AUTHORITY, Approver.EMPLOYER]
+# A hold over unclear words: the authorizer decides the arrangements (lines 119, 145-153), but the directive
+# names nobody who settles what its own undefined words mean, so NOT_NAMED is defensible too.
+UNCLEAR_HOLD = [*AUTHORIZER, Approver.NOT_NAMED]
+# Line 1149: next-of-kin travel rests on "the opinion of the attending physician".
+NEXT_OF_KIN_SIGN_OFF = [*ORDINARY, Approver.ATTENDING_PHYSICIAN]
+# Lines 1061 and 1097: a trip home (or a visit in its place) needs work schedules that permit the absence,
+# which the immediate supervisor confirms (lines 145-153 name the supervisor in the consultation).
+WEEKEND_SIGN_OFF = [*ORDINARY, Approver.IMMEDIATE_SUPERVISOR]
 
 ALASKA_PHRASE = "continental USA"
 LAYOVER_PHRASE = "layover equivalent to an overnight stop"
@@ -270,8 +278,9 @@ def solve(trip, offers, hidden):
     check_hidden(hidden)
     kind = hidden["kind"]
     if kind == "PERSONAL" or trip.authority_kind == AuthorityKind.NONE:
-        return refuse([ReasonCode.PERSONAL_TRAVEL_NOT_COVERED],
-                      [Clause.DEFINITIONS, Clause.WRITTEN_AUTHORIZATION, Clause.APPLICATION],
+        return refuse([ReasonCode.PERSONAL_TRAVEL_NOT_COVERED, ReasonCode.OUTSIDE_POLICY_SCOPE],
+                      [Clause.DEFINITIONS, Clause.WRITTEN_AUTHORIZATION, Clause.APPLICATION,
+                       Clause.EMPLOYER_AUTHORIZATION],
                       "Line 45: the directive covers travel on government business; line 89: government travel is "
                       "travel authorized by the employer; line 121: it is authorized in advance in writing. A "
                       "family holiday with no authorization is not government travel.")
@@ -320,7 +329,7 @@ def weekend(trip, offers, hidden):
         home = cheapest(on_route(offers, trip.origin.code, trip.destination.code), Cabin.ECONOMY)
         if not home:
             raise ValueError("no return fare home")
-        return answer(Decision.BOOK, home, [ReasonCode.WEEKEND_TRAVEL_HOME, ReasonCode.LOWEST_FARE], ORDINARY,
+        return answer(Decision.BOOK, home, [ReasonCode.WEEKEND_TRAVEL_HOME, ReasonCode.LOWEST_FARE], WEEKEND_SIGN_OFF,
                       [Clause.INTERNATIONAL_WEEKEND_HOME],
                       f"Lines 1065-1079: {status}; 'the most economical return airfare'.")
     home = cheapest(on_route(offers, trip.destination.code, trip.origin.code), Cabin.ECONOMY)
@@ -329,7 +338,7 @@ def weekend(trip, offers, hidden):
         raise ValueError("a spouse visit is compared with the employee's own return fare home")
     numbers = f"visitor's return {visit[0].fare_cents} cents against the employee's {home[0].fare_cents}"
     if visit[0].fare_cents <= home[0].fare_cents:
-        return answer(Decision.BOOK, visit, [ReasonCode.SPOUSE_ALTERNATIVE, ReasonCode.LOWEST_FARE], ORDINARY,
+        return answer(Decision.BOOK, visit, [ReasonCode.SPOUSE_ALTERNATIVE, ReasonCode.LOWEST_FARE], WEEKEND_SIGN_OFF,
                       [Clause.INTERNATIONAL_WEEKEND_ALTERNATIVES],
                       f"Line 1097: in place of the trip home, a spouse may travel 'when there is no additional cost "
                       f"to the employer'; {status}; {numbers}.")
@@ -354,7 +363,7 @@ def flight(trip, offers, hidden):
         if economy_reading == international_reading:
             raise ValueError("an Alaska trip whose two readings agree is not modelled (no flag needed)")
         held = economy_reading + international_reading
-        return answer(Decision.FLAG_FOR_APPROVAL, held, [ReasonCode.UNCLEAR_POLICY_TEXT], AUTHORIZER,
+        return answer(Decision.FLAG_FOR_APPROVAL, held, [ReasonCode.UNCLEAR_POLICY_TEXT], UNCLEAR_HOLD,
                       [Clause.CANADA_USA_MODULE, Clause.INTERNATIONAL_MODULE, Clause.INTERNATIONAL_TRANSPORTATION,
                        Clause.APPENDIX_C],
                       "Lines 609 and 851: Module 3 'in Canada or in the continental USA', Module 4 outside them; "
@@ -369,7 +378,7 @@ def flight(trip, offers, hidden):
         for reading in (True, False):
             sides = any(direction_over(o.segments, o.layover_minutes, o.stopover_nights, reading) for o in usable)
             held += best(usable, sides, intent)
-        return answer(Decision.FLAG_FOR_APPROVAL, held, [ReasonCode.UNCLEAR_POLICY_TEXT], AUTHORIZER,
+        return answer(Decision.FLAG_FOR_APPROVAL, held, [ReasonCode.UNCLEAR_POLICY_TEXT], UNCLEAR_HOLD,
                       [Clause.INTERNATIONAL_TRANSPORTATION, Clause.NJC_DECISION],
                       "Line 1019: continuous air travel ends 'with an overnight stop or layover equivalent to an "
                       "overnight stop', which is not defined; this routing waits overnight in the terminal with "
@@ -381,7 +390,7 @@ def flight(trip, offers, hidden):
             raise ValueError("offers differ in entitlement but the scenario fixes no routing")
         held = (best([o for o in usable if entitled[o.offer_id]], True, intent)
                 + best([o for o in usable if not entitled[o.offer_id]], False, intent))
-        return answer(Decision.FLAG_FOR_APPROVAL, held, [ReasonCode.UNCLEAR_POLICY_TEXT], AUTHORIZER,
+        return answer(Decision.FLAG_FOR_APPROVAL, held, [ReasonCode.UNCLEAR_POLICY_TEXT], UNCLEAR_HOLD,
                       [Clause.NJC_DECISION, Clause.INTERNATIONAL_TRANSPORTATION, Clause.EMPLOYER_AUTHORIZATION],
                       "No routing is chosen. The nonstop is over the limit (business, line 1019); the cheaper "
                       "routing with a hotel night is split and gives economy, and line 1017 seeks the lowest "
@@ -403,15 +412,19 @@ def flight(trip, offers, hidden):
     if hidden["kind"] == "NEXT_OF_KIN":
         if intent != "CHEAPEST":
             raise ValueError("next-of-kin travel in a better cabin is not modelled")
-        return answer(Decision.BOOK, chosen, [ReasonCode.NEXT_OF_KIN_TRAVEL, ReasonCode.LOWEST_FARE], ORDINARY,
+        return answer(Decision.BOOK, chosen, [ReasonCode.NEXT_OF_KIN_TRAVEL, ReasonCode.LOWEST_FARE],
+                      NEXT_OF_KIN_SIGN_OFF,
                       [Clause.NEXT_OF_KIN],
                       f"Line 1149: with the attending physician's opinion on file, next-of-kin travel is reimbursed "
                       f"'as if that person were an employee'; the cheapest seat was asked for ({numbers}).")
     if target == Cabin.BUSINESS:
-        reasons = [ReasonCode.INTERNATIONAL_LONG_FLIGHT]
+        # Business is authorized because the long international journey qualifies; either code says so.
+        reasons = [ReasonCode.INTERNATIONAL_LONG_FLIGHT, ReasonCode.LONG_FLIGHT_APPROVED]
         why = "Line 1019: continuous air travel exceeds nine hours, so business/executive is authorized"
     elif target == Cabin.PREMIUM_ECONOMY:
-        reasons = [ReasonCode.PREMIUM_ECONOMY_ALLOWED]
+        # The cabin is the next one down, granted by the same long-journey entitlement.
+        reasons = [ReasonCode.PREMIUM_ECONOMY_ALLOWED, ReasonCode.INTERNATIONAL_LONG_FLIGHT,
+                   ReasonCode.LONG_FLIGHT_APPROVED]
         why = "Line 1019: entitled, business is not sold, so 'any lower fare class': premium economy, never first"
     elif is_entitled:
         reasons = [ReasonCode.LOWEST_FARE]
@@ -420,9 +433,8 @@ def flight(trip, offers, hidden):
         reasons = [ReasonCode.LOWEST_FARE]
         why = "Lines 769 and 1017: economy is the standard and the lowest appropriate fare is sought"
         if intent == "BEST_ALLOWED":
-            reasons.append(ReasonCode.UPGRADE_NOT_ELIGIBLE)
-            if module == 4:
-                reasons.append(ReasonCode.LONG_FLIGHT_CONDITION_NOT_MET)
+            # In Module 3 the only long-flight rule (line 1019, Module 4) cannot be met either.
+            reasons += [ReasonCode.UPGRADE_NOT_ELIGIBLE, ReasonCode.LONG_FLIGHT_CONDITION_NOT_MET]
             why += "; no block of continuous air travel is over nine hours, or the trip is in Module 3"
     clauses = [Clause.INTERNATIONAL_TRANSPORTATION] if module == 4 else [Clause.CANADA_USA_TRANSPORTATION]
     regions = (hidden["origin_region"], hidden["destination_region"])

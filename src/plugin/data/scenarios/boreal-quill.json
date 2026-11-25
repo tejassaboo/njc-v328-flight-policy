@@ -110,7 +110,8 @@
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY"
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NOT_NAMED"
     ],
     "clauses": [
       "APPENDIX_C",

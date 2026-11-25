@@ -45,7 +45,8 @@ ID_CATEGORY_ENUMS = [contract.PersonKind, contract.AuthorityKind, contract.Issue
 # one that always books the cheapest seat (with the right section). Economy at the lowest appropriate fare is
 # this handbook's standard (lines 769, 1017), so the always-lowest agent passes every case whose right answer
 # is the cheapest seat listed; set to what it passes (see README).
-MAX_PASS_ALWAYS_FLAG = 0
+# The always-flag agent passes exactly the three holds over unclear words (it is given the held offer).
+MAX_PASS_ALWAYS_FLAG = 3
 MAX_PASS_ALWAYS_LOWEST = 15
 
 # Hand-built duration cases beyond the automatic both-sides tests: (rule, outbound scheduled minutes per

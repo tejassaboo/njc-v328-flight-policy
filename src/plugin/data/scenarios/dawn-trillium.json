@@ -179,6 +179,7 @@
     ],
     "approvers": [
       "EMPLOYER",
+      "IMMEDIATE_SUPERVISOR",
       "MANAGER_DELEGATED_AUTHORITY",
       "NONE"
     ],

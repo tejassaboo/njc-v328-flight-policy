@@ -96,7 +96,8 @@
       "BUSINESS"
     ],
     "reason_codes": [
-      "INTERNATIONAL_LONG_FLIGHT"
+      "INTERNATIONAL_LONG_FLIGHT",
+      "LONG_FLIGHT_APPROVED"
     ],
     "approvers": [
       "EMPLOYER",

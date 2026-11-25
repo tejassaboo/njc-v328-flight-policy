@@ -121,6 +121,7 @@
       "NEXT_OF_KIN_TRAVEL"
     ],
     "approvers": [
+      "ATTENDING_PHYSICIAN",
       "EMPLOYER",
       "MANAGER_DELEGATED_AUTHORITY",
       "NONE"

@@ -115,6 +115,8 @@
       "PREMIUM_ECONOMY"
     ],
     "reason_codes": [
+      "INTERNATIONAL_LONG_FLIGHT",
+      "LONG_FLIGHT_APPROVED",
       "PREMIUM_ECONOMY_ALLOWED"
     ],
     "approvers": [

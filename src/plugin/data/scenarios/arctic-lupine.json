@@ -94,6 +94,7 @@
       "NONE"
     ],
     "reason_codes": [
+      "OUTSIDE_POLICY_SCOPE",
       "PERSONAL_TRAVEL_NOT_COVERED"
     ],
     "approvers": [
@@ -104,6 +105,7 @@
     "clauses": [
       "APPLICATION",
       "DEFINITIONS",
+      "EMPLOYER_AUTHORIZATION",
       "WRITTEN_AUTHORIZATION"
     ],
     "unclear_phrase": ""
