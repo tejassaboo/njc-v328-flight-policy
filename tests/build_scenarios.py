@@ -72,10 +72,29 @@ AUDIT_APPROVERS = {
 }
 AUDIT_CLAUSES = {"arctic-lupine": ["EMPLOYER_AUTHORIZATION"]}
 
-# Approver wording (template, after the paid validation of 2026-11-24): the approver is "the role whose sign-off
-# this decision relies on, whether already on file or still awaited; NONE only when no one's sign-off is
-# involved at all". Every case that books relies on the travel authorization on file, so NONE is dropped from
-# every BOOK accept set (the design accepted it because it graded the approver only on holds).
+# Approver wording (template SYNC_NOTES 4', after the paid re-validation of 2026-11-24, superseding the earlier
+# rule that dropped NONE from bookings): a BOOK or REFUSE whose sign-off is already on file accepts that role and
+# NONE; a hold accepts only the awaited role(s), never NONE. Every case that books has its sign-offs on file (the
+# travel authorization, and the physician's opinion or the supervisor's confirmation where needed), so every BOOK
+# accept set holds NONE (as the design had it).
+
+# Paid re-validation of 2026-11-24 (REVALIDATION_NOTES.md): grader defects, each a code a careful reader could
+# defend. iron-plover's hold also waits for the director to choose the routing (line 119); maple-osprey declines
+# the changeable fare wanted for personal plans (line 1003); yew-coulee's visit is refused under the spouse
+# provision, and the shared list has no code for a visit refused on cost (line 1097).
+REVALIDATION_REASONS = {
+    "iron-plover": ["APPROVAL_REQUIRED"], "maple-osprey": ["REFUNDABLE_FARE_NOT_ALLOWED"],
+    "yew-coulee": ["SPOUSE_ALTERNATIVE"],
+}
+REVALIDATION_NOTES = {
+    "iron-plover": ("Re-validation 2026-11-24: reason accept set widened with APPROVAL_REQUIRED (the hold waits for "
+                    "the director's choice of routing, line 119)."),
+    "maple-osprey": ("Re-validation 2026-11-24: reason accept set widened with REFUNDABLE_FARE_NOT_ALLOWED (the "
+                     "changeable fare is declined, line 1003); answer_key_inputs changeable_asked."),
+    "yew-coulee": ("Re-validation 2026-11-24: reason accept set widened with SPOUSE_ALTERNATIVE (the provision whose "
+                   "no-additional-cost condition fails, line 1097)."),
+}
+HIDDEN_FIXES = {"maple-osprey": {"changeable_asked": True}}
 
 # Weekend-home timing (paid validation: kelp-lantern and yew-coulee were answered on weeks elapsed by the trip
 # date, the key counts the whole travel-status period). The dates move so that every reading of "Minimum of:
@@ -317,10 +336,12 @@ def expected(sid, design):
     tags = {o["tag"]: o for g in design["offer_constraints"]["groups"] for o in g["offers"]}
     cabins = sorted({tags[slot]["cabin"].upper() for slot in slots}) or ["NONE"]
     reasons = sorted({REASON[code] for code in exp["reason_accept"]} | set(EXTRA_REASONS.get(sid, []))
-                     | set(AUDIT_REASONS.get(sid, [])))
+                     | set(AUDIT_REASONS.get(sid, [])) | set(REVALIDATION_REASONS.get(sid, [])))
     approvers = set(exp["approver_accept"]) | set(AUDIT_APPROVERS.get(sid, []))
     if decision == "BOOK":
-        approvers.discard("NONE")
+        approvers.add("NONE")
+    else:
+        assert decision == "REFUSE" or "NONE" not in approvers, sid
     approvers = sorted(approvers)
     clauses = sorted({CLAUSE[name] for name in exp["clause_accept"]} | set(AUDIT_CLAUSES.get(sid, [])))
     phrase = UNCLEAR[sid][0] if sid in UNCLEAR else ""
@@ -359,6 +380,9 @@ def main():
             notes += f" Port: reason accept set widened with {EXTRA_REASONS[sid]} (shared reason list)."
         if sid in TIMING_NOTES:
             notes += " " + TIMING_NOTES[sid]
+        if sid in REVALIDATION_NOTES:
+            notes += " " + REVALIDATION_NOTES[sid]
+        hidden.update(HIDDEN_FIXES.get(sid, {}))
         trip = trip_record(design["trip_facts"], design)
         for name, value in TRIP_FIXES.get(sid, {}).items():
             assert name in trip, name

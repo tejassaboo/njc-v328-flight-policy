@@ -109,11 +109,13 @@
       "ECONOMY"
     ],
     "reason_codes": [
-      "LOWEST_FARE"
+      "LOWEST_FARE",
+      "REFUNDABLE_FARE_NOT_ALLOWED"
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY"
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
     ],
     "clauses": [
       "INTERNATIONAL_TRANSPORTATION"
@@ -159,11 +161,12 @@
     }
   ],
   "distractors": [],
-  "design_notes": "Design vancouver-seoul-fisheries-talks. Flexibility is wanted for personal plans; change fees are reimbursed only for official purposes, so the dearer changeable fare is not the lowest appropriate airfare.",
+  "design_notes": "Design vancouver-seoul-fisheries-talks. Flexibility is wanted for personal plans; change fees are reimbursed only for official purposes, so the dearer changeable fare is not the lowest appropriate airfare. Re-validation 2026-11-24: reason accept set widened with REFUNDABLE_FARE_NOT_ALLOWED (the changeable fare is declined, line 1003); answer_key_inputs changeable_asked.",
   "answer_key_inputs": {
     "origin_region": "CANADA",
     "destination_region": "INTERNATIONAL",
     "intent": "CHEAPEST",
-    "kind": "FLIGHT"
+    "kind": "FLIGHT",
+    "changeable_asked": true
   }
 }

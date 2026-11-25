@@ -123,7 +123,8 @@
     "approvers": [
       "ATTENDING_PHYSICIAN",
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY"
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
     ],
     "clauses": [
       "NEXT_OF_KIN"

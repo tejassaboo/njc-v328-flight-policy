@@ -120,6 +120,7 @@
       "ECONOMY"
     ],
     "reason_codes": [
+      "APPROVAL_REQUIRED",
       "UNCLEAR_POLICY_TEXT"
     ],
     "approvers": [
@@ -191,7 +192,7 @@
     }
   ],
   "distractors": [],
-  "design_notes": "Design ottawa-dubai-energy-ministers. Port: the design's London stop was 1475 minutes but its clock times (06:40 day 1 to 09:15 day 2) are 1595 minutes apart; the clock times are kept, so the stop is 1595 minutes. Port: must_keep Decision 1575 narrowed from lines 3214-3236 to 3214 and 3236.",
+  "design_notes": "Design ottawa-dubai-energy-ministers. Port: the design's London stop was 1475 minutes but its clock times (06:40 day 1 to 09:15 day 2) are 1595 minutes apart; the clock times are kept, so the stop is 1595 minutes. Port: must_keep Decision 1575 narrowed from lines 3214-3236 to 3214 and 3236. Re-validation 2026-11-24: reason accept set widened with APPROVAL_REQUIRED (the hold waits for the director's choice of routing, line 119).",
   "answer_key_inputs": {
     "origin_region": "CANADA",
     "destination_region": "INTERNATIONAL",

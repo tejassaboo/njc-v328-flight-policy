@@ -173,7 +173,8 @@
     ],
     "reason_codes": [
       "COMPANION_NOT_COVERED",
-      "NO_COMPLIANT_OFFER"
+      "NO_COMPLIANT_OFFER",
+      "SPOUSE_ALTERNATIVE"
     ],
     "approvers": [
       "EMPLOYER",
@@ -215,7 +216,7 @@
     }
   ],
   "distractors": [],
-  "design_notes": "Design paris-assignment-partner-visit. 70 days of travel status earns one trip home (3.4.12); the spouse visit replaces it only at no additional cost. Port: reason accept set widened with ['NO_COMPLIANT_OFFER'] (shared reason list). Port: travel status from 2026-12-14 (was 2027-01-04): 91 days in all (13 whole weeks, two trips) and 60 by the visit (8 whole weeks, one trip), so a trip is available on every reading and the visit is refused on cost alone (line 1097).",
+  "design_notes": "Design paris-assignment-partner-visit. 70 days of travel status earns one trip home (3.4.12); the spouse visit replaces it only at no additional cost. Port: reason accept set widened with ['NO_COMPLIANT_OFFER'] (shared reason list). Port: travel status from 2026-12-14 (was 2027-01-04): 91 days in all (13 whole weeks, two trips) and 60 by the visit (8 whole weeks, one trip), so a trip is available on every reading and the visit is refused on cost alone (line 1097). Re-validation 2026-11-24: reason accept set widened with SPOUSE_ALTERNATIVE (the provision whose no-additional-cost condition fails, line 1097).",
   "answer_key_inputs": {
     "origin_region": "CANADA",
     "destination_region": "INTERNATIONAL",

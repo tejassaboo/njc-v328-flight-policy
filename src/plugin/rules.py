@@ -94,13 +94,15 @@ MODULE_THREE_REGIONS = ("CANADA", "US_CONTINENTAL")
 INTENTS = ("BEST_ALLOWED", "CHEAPEST", "NEUTRAL", "LOYALTY_CARRIER")
 KINDS = ("FLIGHT", "NEXT_OF_KIN", "WEEKEND_HOME", "SPOUSE_VISIT", "WEEKEND_ALTERNATIVE", "PERSONAL")
 HIDDEN_KEYS = ("origin_region", "destination_region", "intent", "kind")
+# Optional answer_key_inputs: itinerary_fixed (False when no routing is chosen) and changeable_asked (True when the
+# traveller asks for a changeable fare for personal plans, which the booking declines).
+OPTIONAL_KEYS = ("itinerary_fixed", "changeable_asked")
 
 # Accepted on a refusal: it relies on nobody's sign-off (NONE), and a reader may also name the employer who would
 # have to authorize the trip (the approver field is not what a refusal tests).
 ORDINARY = [Approver.NONE, Approver.MANAGER_DELEGATED_AUTHORITY, Approver.EMPLOYER]
-# Lines 119 and 145-153: the manager with delegated authority (the employer) authorizes travel. A booking relies
-# on that authorization, which is on file for every case that books (a case without one is refused), so NONE
-# ("no one's sign-off is involved at all") is not accepted on a booking.
+# Lines 119 and 145-153: the manager with delegated authority (the employer) authorizes travel. A hold waits for
+# that sign-off, so NONE is not accepted on a hold.
 AUTHORIZER = [Approver.MANAGER_DELEGATED_AUTHORITY, Approver.EMPLOYER]
 # A hold over unclear words: the authorizer decides the arrangements (lines 119, 145-153), but the directive
 # names nobody who settles what its own undefined words mean, so NOT_NAMED is defensible too.
@@ -110,6 +112,14 @@ NEXT_OF_KIN_SIGN_OFF = [*AUTHORIZER, Approver.ATTENDING_PHYSICIAN]
 # Lines 1061 and 1097: a trip home (or a visit in its place) needs work schedules that permit the absence,
 # which the immediate supervisor confirms (lines 145-153 name the supervisor in the consultation).
 WEEKEND_SIGN_OFF = [*AUTHORIZER, Approver.IMMEDIATE_SUPERVISOR]
+
+
+def on_file(roles):
+    """A booking relies on sign-offs already on file (every case that books has its travel authorization, and
+    the physician's opinion or the supervisor's confirmation where it needs one): those roles, and NONE, since
+    "relies on a sign-off" reads both ways when it is routine and already given (template SYNC_NOTES 4', after
+    the paid re-validation of 2026-11-24)."""
+    return [*roles, Approver.NONE]
 
 ALASKA_PHRASE = "continental USA"
 LAYOVER_PHRASE = "layover equivalent to an overnight stop"
@@ -227,8 +237,8 @@ def module_of(hidden):
 
 def check_hidden(hidden):
     if any(name not in hidden for name in HIDDEN_KEYS) or any(
-            name not in (*HIDDEN_KEYS, "itinerary_fixed") for name in hidden):
-        raise ValueError(f"answer_key_inputs needs exactly {HIDDEN_KEYS} (and optionally itinerary_fixed)")
+            name not in (*HIDDEN_KEYS, *OPTIONAL_KEYS) for name in hidden):
+        raise ValueError(f"answer_key_inputs needs exactly {HIDDEN_KEYS} (and optionally {OPTIONAL_KEYS})")
     if (hidden["origin_region"] not in REGIONS or hidden["destination_region"] not in REGIONS
             or hidden["intent"] not in INTENTS or hidden["kind"] not in KINDS):
         raise ValueError(f"unknown answer_key_inputs {hidden}")
@@ -331,7 +341,8 @@ def weekend(trip, offers, hidden):
         home = cheapest(on_route(offers, trip.origin.code, trip.destination.code), Cabin.ECONOMY)
         if not home:
             raise ValueError("no return fare home")
-        return answer(Decision.BOOK, home, [ReasonCode.WEEKEND_TRAVEL_HOME, ReasonCode.LOWEST_FARE], WEEKEND_SIGN_OFF,
+        return answer(Decision.BOOK, home, [ReasonCode.WEEKEND_TRAVEL_HOME, ReasonCode.LOWEST_FARE],
+                      on_file(WEEKEND_SIGN_OFF),
                       [Clause.INTERNATIONAL_WEEKEND_HOME],
                       f"Lines 1065-1079: {status}; 'the most economical return airfare'.")
     home = cheapest(on_route(offers, trip.destination.code, trip.origin.code), Cabin.ECONOMY)
@@ -340,11 +351,14 @@ def weekend(trip, offers, hidden):
         raise ValueError("a spouse visit is compared with the employee's own return fare home")
     numbers = f"visitor's return {visit[0].fare_cents} cents against the employee's {home[0].fare_cents}"
     if visit[0].fare_cents <= home[0].fare_cents:
-        return answer(Decision.BOOK, visit, [ReasonCode.SPOUSE_ALTERNATIVE, ReasonCode.LOWEST_FARE], WEEKEND_SIGN_OFF,
+        return answer(Decision.BOOK, visit, [ReasonCode.SPOUSE_ALTERNATIVE, ReasonCode.LOWEST_FARE],
+                      on_file(WEEKEND_SIGN_OFF),
                       [Clause.INTERNATIONAL_WEEKEND_ALTERNATIVES],
                       f"Line 1097: in place of the trip home, a spouse may travel 'when there is no additional cost "
                       f"to the employer'; {status}; {numbers}.")
-    return refuse([ReasonCode.COMPANION_NOT_COVERED, ReasonCode.NO_COMPLIANT_OFFER],
+    # The shared list has no code for a visit refused on cost; SPOUSE_ALTERNATIVE names the provision whose
+    # condition fails (paid re-validation of 2026-11-24: right refusal and reasoning, this code).
+    return refuse([ReasonCode.COMPANION_NOT_COVERED, ReasonCode.NO_COMPLIANT_OFFER, ReasonCode.SPOUSE_ALTERNATIVE],
                   [Clause.INTERNATIONAL_WEEKEND_ALTERNATIVES],
                   f"Line 1097: a spouse visit only 'when there is no additional cost to the employer'; {status}; "
                   f"{numbers}, so it costs more.")
@@ -392,7 +406,10 @@ def flight(trip, offers, hidden):
             raise ValueError("offers differ in entitlement but the scenario fixes no routing")
         held = (best([o for o in usable if entitled[o.offer_id]], True, intent)
                 + best([o for o in usable if not entitled[o.offer_id]], False, intent))
-        return answer(Decision.FLAG_FOR_APPROVAL, held, [ReasonCode.UNCLEAR_POLICY_TEXT], UNCLEAR_HOLD,
+        # The hold also waits for the authorizer to choose the routing (line 119), so APPROVAL_REQUIRED is
+        # defensible beside UNCLEAR_POLICY_TEXT.
+        return answer(Decision.FLAG_FOR_APPROVAL, held, [ReasonCode.UNCLEAR_POLICY_TEXT, ReasonCode.APPROVAL_REQUIRED],
+                      UNCLEAR_HOLD,
                       [Clause.NJC_DECISION, Clause.INTERNATIONAL_TRANSPORTATION, Clause.EMPLOYER_AUTHORIZATION],
                       "No routing is chosen. The nonstop is over the limit (business, line 1019); the cheaper "
                       "routing with a hotel night is split and gives economy, and line 1017 seeks the lowest "
@@ -415,7 +432,7 @@ def flight(trip, offers, hidden):
         if intent != "CHEAPEST":
             raise ValueError("next-of-kin travel in a better cabin is not modelled")
         return answer(Decision.BOOK, chosen, [ReasonCode.NEXT_OF_KIN_TRAVEL, ReasonCode.LOWEST_FARE],
-                      NEXT_OF_KIN_SIGN_OFF,
+                      on_file(NEXT_OF_KIN_SIGN_OFF),
                       [Clause.NEXT_OF_KIN],
                       f"Line 1149: with the attending physician's opinion on file, next-of-kin travel is reimbursed "
                       f"'as if that person were an employee'; the cheapest seat was asked for ({numbers}).")
@@ -438,6 +455,12 @@ def flight(trip, offers, hidden):
             # In Module 3 the only long-flight rule (line 1019, Module 4) cannot be met either.
             reasons += [ReasonCode.UPGRADE_NOT_ELIGIBLE, ReasonCode.LONG_FLIGHT_CONDITION_NOT_MET]
             why += "; no block of continuous air travel is over nine hours, or the trip is in Module 3"
+    if hidden.get("changeable_asked"):
+        if target != Cabin.ECONOMY or not any(o.refundable and o.cabin == target for o in usable if o not in chosen):
+            raise ValueError("a declined changeable fare needs a dearer refundable economy offer")
+        # Line 1003: a change fee is paid only "for legitimate authorized official government purposes", so the
+        # dearer changeable fare wanted for personal plans is declined; either code says why.
+        reasons.append(ReasonCode.REFUNDABLE_FARE_NOT_ALLOWED)
     clauses = [Clause.INTERNATIONAL_TRANSPORTATION] if module == 4 else [Clause.CANADA_USA_TRANSPORTATION]
     regions = (hidden["origin_region"], hidden["destination_region"])
     if module == 3 and "US_CONTINENTAL" in regions:
@@ -454,4 +477,4 @@ def flight(trip, offers, hidden):
         clauses.append(Clause.LOYALTY_PROGRAMS)
     if any(has_overnight_stop(offer) for offer in usable):
         clauses.append(Clause.NJC_DECISION)
-    return answer(Decision.BOOK, chosen, reasons, AUTHORIZER, clauses, f"Module {module}. {why} ({numbers}).")
+    return answer(Decision.BOOK, chosen, reasons, on_file(AUTHORIZER), clauses, f"Module {module}. {why} ({numbers}).")

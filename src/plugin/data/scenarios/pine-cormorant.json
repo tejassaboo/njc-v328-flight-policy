@@ -118,7 +118,8 @@
     ],
     "approvers": [
       "EMPLOYER",
-      "MANAGER_DELEGATED_AUTHORITY"
+      "MANAGER_DELEGATED_AUTHORITY",
+      "NONE"
     ],
     "clauses": [
       "INTERNATIONAL_TRANSPORTATION",
